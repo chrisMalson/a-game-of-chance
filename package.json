@@ -1,0 +1,24 @@
+{
+  "name": "nextjs",
+  "version": "4.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "axios": "^0.19.2",
+    "clsx": "latest",
+    "html-react-parser": "^0.10.2",
+    "htmlparser2": "^4.1.0",
+    "next": "latest",
+    "now": "^17.0.4",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "now": "now",
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+  }
+}

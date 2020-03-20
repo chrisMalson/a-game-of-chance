@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Super Mario Odyssey",
+    "publisher": "Nintendo",
+    "developer": "Nintendo",
+    "platform": ["Switch"],
+    "genre": ["Action", "Platformer"],
+    "year": 2017
+  },
+  {
+    "title": "Dishonored 2",
+    "publisher": "Bethesda",
+    "developer": "Arkane Studios",
+    "platform": ["Playstation 4", "Windows", "Xbox One"],
+    "genre": ["Action", "Stealth"],
+    "year": 2016
+  },
+  {
+    "title": "Dragon Quest XI: Echoes of an Elusive Age",
+    "publisher": "Square Enix",
+    "developer": "Square Enix",
+    "platform": ["Playstation 4", "3DS", "Switch"],
+    "genre": ["Role-Playing"],
+    "year": 2017
+  },
+  {
+    "title": "Shadow of the Tomb Raider",
+    "publisher": "Square Enix",
+    "developer": "Eidos",
+    "platform": ["Playstation 4", "Windows", "Xbox One"],
+    "genre": ["Action", "Stealth", "Shooter"],
+    "year": 2018
+  },
+  {
+    "title": "DOOM",
+    "publisher": "Bethesda",
+    "developer": "id Software",
+    "platform": ["Playstation 4", "Windows", "Xbox One", "Switch"],
+    "genre": ["Shooter"],
+    "year": 2016
+  },
+  {
+    "title": "Captain Toad: Treasure Tracker",
+    "publisher": "Nintendo",
+    "developer": "Nintendo",
+    "platform": ["Switch", "3DS", "Wii U"],
+    "genre": ["Platformer", "Puzzle"],
+    "year": 2018
+  }
+]
