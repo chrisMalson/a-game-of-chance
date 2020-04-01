@@ -1,5 +1,7 @@
 import axios from "axios";
-import parse from "html-react-parser";
+
+import GameInfo from "../../components/GameInfo";
+import AddGameButton from "../../components/AddGameButton";
 
 // getStaticProps would have required getStaticPaths = revisit?
 export const getServerSideProps = async context => {
@@ -23,11 +25,10 @@ export const getServerSideProps = async context => {
 
 // currently displays name, description, and a related image
 // description property was in HTML format; needed html-react-parser to display text without <p> tags
-const GamePage = props => (
+const GamePage = ({ game }) => (
   <>
-    <h1>{props.game.name}</h1>
-    {parse(props.game.description)}
-    <img src={props.game.background_image} />
+    <GameInfo game={game} />
+    <AddGameButton game={game} />
   </>
 );
 
