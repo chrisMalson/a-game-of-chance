@@ -1,7 +1,11 @@
 import axios from "axios";
+import { useContext } from "react";
 
 import GameInfo from "../../components/GameInfo";
 import AddGameButton from "../../components/AddGameButton";
+import RemoveGameButton from "../../components/RemoveGameButton";
+import ChangePlatformButton from "../../components/ChangePlatformButton";
+import MyContext from "../../components/MyContext";
 
 // getStaticProps would have required getStaticPaths = revisit?
 export const getServerSideProps = async context => {
@@ -18,18 +22,39 @@ export const getServerSideProps = async context => {
 
   return {
     props: {
-      game: data
+      game: data,
+      id: parseInt(id, 10)
     }
   };
 };
 
 // currently displays name, description, and a related image
 // description property was in HTML format; needed html-react-parser to display text without <p> tags
-const GamePage = ({ game }) => (
-  <>
-    <GameInfo game={game} />
-    <AddGameButton game={game} />
-  </>
-);
+const GamePage = ({ game, id }) => {
+  const { games } = useContext(MyContext);
+  const isOnList = games.filter(game => game.id === id);
+  const currentPlatform =
+    isOnList.length !== 0 ? isOnList[0].platform : undefined;
+  const hasMultiplePlatforms = game.platforms.length > 1;
+
+  return (
+    <>
+      <GameInfo game={game} />
+      {isOnList.length === 0 ? (
+        <AddGameButton game={game} />
+      ) : (
+        <>
+          {hasMultiplePlatforms && (
+            <ChangePlatformButton
+              game={game}
+              currentPlatform={currentPlatform}
+            />
+          )}
+          <RemoveGameButton game={game} />
+        </>
+      )}
+    </>
+  );
+};
 
 export default GamePage;

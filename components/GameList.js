@@ -3,21 +3,29 @@
 // just a note for future chris
 // PS: if you do, remember to rename to [state, dispatch] in _app.js
 
+import Link from "next/link";
 import { useContext } from "react";
 import MyContext from "./MyContext";
+
+import RemoveGameButton from "../components/RemoveGameButton";
 
 const GameList = () => {
   const { games } = useContext(MyContext);
 
+  const gameListRender = games.map(game => (
+    <h4 key={game.id}>
+      <Link href="/game/[id]" as={`/game/${game.id}`}>
+        <a>
+          {game.name} - {game.platform}
+        </a>
+      </Link>{" "}
+      <RemoveGameButton game={game} />
+    </h4>
+  ));
+
   return (
     <>
-      <div className="list">
-        {games.map(game => (
-          <h4 key={game.id}>
-            {game.name}, {game.id}
-          </h4>
-        ))}
-      </div>
+      <div className="list">{gameListRender}</div>
       <style jsx>{`
         .list {
           margin: 10%;

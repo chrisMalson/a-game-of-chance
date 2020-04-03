@@ -16,8 +16,8 @@ export const getServerSideProps = async context => {
   return {
     props: {
       games: data.results
-        .filter(game => !!game.rating) // games with rating of 0 tend not to be official releases
-        .sort((a, b) => b.rating - a.rating) // sorted in rating order, largest to smallest
+      // .filter(game => !!game.rating) // games with rating of 0 tend not to be official releases
+      // .sort((a, b) => b.rating - a.rating) // sorted in rating order, largest to smallest
     }
   };
 };
