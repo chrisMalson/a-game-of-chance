@@ -5,14 +5,14 @@
 
 import Link from "next/link";
 import { useContext } from "react";
-import MyContext from "./MyContext";
+import GamesContext from "./GamesContext";
 
 import RemoveGameButton from "../components/RemoveGameButton";
 
 const GameList = () => {
-  const { games } = useContext(MyContext);
+  const { games } = useContext(GamesContext);
 
-  const gameListRender = games.map(game => (
+  const gameListRender = games.map((game) => (
     <h4 key={game.id}>
       <Link href="/game/[id]" as={`/game/${game.id}`}>
         <a>

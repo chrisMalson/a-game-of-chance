@@ -8,10 +8,10 @@ const SearchForm = () => {
   const [search, setSearch] = useState("");
 
   // updates component state with value from input field
-  const onChange = e => setSearch(e.target.value);
+  const onChange = (e) => setSearch(e.target.value);
 
   // redirects with state-saved e.target.value from input field
-  const handleSearchSubmit = e => {
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
     router.push("/search/[value]", `/search/${search}`);
   };
@@ -32,7 +32,7 @@ const SearchForm = () => {
           justify-content: center;
           display: flex;
           flex-direction: column;
-          margin: 25%;
+          margin: 5%;
         }
       `}</style>
     </>

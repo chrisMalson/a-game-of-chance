@@ -4,15 +4,15 @@
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import MyContext from "./MyContext";
+import GamesContext from "./GamesContext";
 
 const AddGameButton = ({ game }) => {
   const router = useRouter();
-  const { dispatch } = useContext(MyContext);
+  const { dispatch } = useContext(GamesContext);
   const { name, id } = game;
   const [platform, setPlatform] = useState(game.platforms[0].platform.name);
 
-  const availablePlatforms = game.platforms.map(i => (
+  const availablePlatforms = game.platforms.map((i) => (
     <option key={i.platform.name} value={i.platform.name}>
       {i.platform.name}
     </option>
@@ -23,7 +23,7 @@ const AddGameButton = ({ game }) => {
     router.push("/");
   };
 
-  const handleChoosePlatform = e => setPlatform(e.target.value);
+  const handleChoosePlatform = (e) => setPlatform(e.target.value);
 
   return (
     <>

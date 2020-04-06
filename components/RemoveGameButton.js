@@ -4,11 +4,11 @@
 
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import MyContext from "./MyContext";
+import GamesContext from "./GamesContext";
 
 const RemoveGameButton = ({ game }) => {
   const router = useRouter();
-  const { dispatch } = useContext(MyContext);
+  const { dispatch } = useContext(GamesContext);
   const { id } = game;
 
   const handleRemoveGame = () => {

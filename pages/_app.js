@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import App from "next/app";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -6,18 +6,29 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 
 // imports by me, not Next.js
-import MyContext from "../components/MyContext";
+import GamesContext from "../components/GamesContext";
 import gameListReducer from "../reducers/gameList";
 
 // wrap reducer around context provider for global state
 // necessary for hooks to work with next's class-based app component
 const ReducerWrapper = ({ children }) => {
   const [games, dispatch] = useReducer(gameListReducer, []);
+  useEffect(() => {
+    if (localStorage.getItem("games")) {
+      const storedGames = JSON.parse(localStorage.getItem("games"));
+      dispatch({ type: "BUILD_STORED_LIST", storedGames });
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(games);
+    localStorage.setItem("games", JSON.stringify(games));
+  }, [games]);
 
   return (
-    <MyContext.Provider value={{ games, dispatch }}>
+    <GamesContext.Provider value={{ games, dispatch }}>
       {children}
-    </MyContext.Provider>
+    </GamesContext.Provider>
   );
 };
 
@@ -28,11 +39,7 @@ export default class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-
-    // in the future, will populate games list from local storage / database
   }
-
-  // will need ComponentDidUpdate call here later to save game list to local storage / database
 
   render() {
     const { Component, pageProps } = this.props;
