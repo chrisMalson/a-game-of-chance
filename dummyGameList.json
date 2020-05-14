@@ -1,0 +1,10 @@
+{
+  "user1": {
+    "profile": {
+      "username": "blah",
+      "password": "blah234"
+    },
+    "games": {}
+  },
+  "user2": {}
+}

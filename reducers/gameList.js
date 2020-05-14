@@ -2,7 +2,7 @@ const gameListReducer = (state, { type, name, id, platform, storedGames }) => {
   switch (type) {
     // LIST MANAGEMENT
     case "ADD_GAME":
-      return [...state, { name, id, platform }]; // id will likely be used for element key purposes
+      return [...state, { name, id, platform, isVisible: true }]; // id will likely be used for element key purposes
     case "REMOVE_GAME":
       return state.filter((game) => game.id !== id);
     case "CHANGE_PLATFORM":
@@ -22,6 +22,18 @@ const gameListReducer = (state, { type, name, id, platform, storedGames }) => {
         .sort((a, b) => a.name.localeCompare(b.name))
         .reverse()
         .map((game) => game);
+    case "SORT_BY_PLATFORM":
+      return state.map((game) => {
+        switch (platform) {
+          case "all-platforms":
+          case game.platform:
+            return { ...game, isVisible: true };
+          default:
+            return { ...game, isVisible: false };
+        }
+      });
+    case "SET_ALL_TO_VISIBLE":
+      return state.map((game) => ({ ...game, isVisible: true }));
     default:
       return state;
   }

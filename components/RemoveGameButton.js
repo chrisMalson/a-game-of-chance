@@ -8,11 +8,12 @@ import GamesContext from "./GamesContext";
 
 const RemoveGameButton = ({ game }) => {
   const router = useRouter();
-  const { dispatch } = useContext(GamesContext);
+  const { games, dispatch } = useContext(GamesContext);
   const { id } = game;
 
   const handleRemoveGame = () => {
     dispatch({ type: "REMOVE_GAME", id });
+
     router.push("/");
   };
 

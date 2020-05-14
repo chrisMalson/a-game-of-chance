@@ -4,24 +4,30 @@
 // PS: if you do, remember to rename to [state, dispatch] in _app.js
 
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import GamesContext from "./GamesContext";
 
-import RemoveGameButton from "../components/RemoveGameButton";
-
 const GameList = () => {
-  const { games } = useContext(GamesContext);
+  const { games, dispatch } = useContext(GamesContext);
 
-  const gameListRender = games.map((game) => (
-    <h4 key={game.id}>
-      <Link href="/game/[id]" as={`/game/${game.id}`}>
-        <a>
-          {game.name} - {game.platform}
-        </a>
-      </Link>{" "}
-      <RemoveGameButton game={game} />
-    </h4>
-  ));
+  useEffect(() => {
+    console.log("did done get fired");
+    dispatch({ type: "SET_ALL_TO_VISIBLE" });
+  }, []);
+
+  console.log(games);
+
+  const gameListRender = games
+    .filter((game) => game.isVisible)
+    .map((game) => (
+      <h4 key={game.id}>
+        <Link href="/game/[id]" as={`/game/${game.id}`}>
+          <a>
+            {game.name} - {game.platform}
+          </a>
+        </Link>
+      </h4>
+    ));
 
   return (
     <>

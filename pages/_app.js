@@ -8,6 +8,7 @@ import theme from "../src/theme";
 // imports by me, not Next.js
 import GamesContext from "../components/GamesContext";
 import gameListReducer from "../reducers/gameList";
+import Header from "../components/Header";
 
 // wrap reducer around context provider for global state
 // necessary for hooks to work with next's class-based app component
@@ -21,12 +22,12 @@ const ReducerWrapper = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(games);
     localStorage.setItem("games", JSON.stringify(games));
   }, [games]);
 
   return (
     <GamesContext.Provider value={{ games, dispatch }}>
+      <Header />
       {children}
     </GamesContext.Provider>
   );
