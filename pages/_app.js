@@ -18,6 +18,7 @@ const ReducerWrapper = ({ children }) => {
     if (localStorage.getItem("games")) {
       const storedGames = JSON.parse(localStorage.getItem("games"));
       dispatch({ type: "BUILD_STORED_LIST", storedGames });
+      console.log("app.js useEffect triggered");
     }
   }, []);
 

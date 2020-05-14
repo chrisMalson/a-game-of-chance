@@ -4,18 +4,11 @@
 // PS: if you do, remember to rename to [state, dispatch] in _app.js
 
 import Link from "next/link";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import GamesContext from "./GamesContext";
 
 const GameList = () => {
   const { games, dispatch } = useContext(GamesContext);
-
-  useEffect(() => {
-    console.log("did done get fired");
-    dispatch({ type: "SET_ALL_TO_VISIBLE" });
-  }, []);
-
-  console.log(games);
 
   const gameListRender = games
     .filter((game) => game.isVisible)

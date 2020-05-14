@@ -12,7 +12,8 @@
     "now": "^17.0.4",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-use-auth": "^0.6.1"
   },
   "scripts": {
     "dev": "next",

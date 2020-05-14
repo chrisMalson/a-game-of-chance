@@ -10,7 +10,7 @@ const gameListReducer = (state, { type, name, id, platform, storedGames }) => {
         game.id !== id ? game : { name, id, platform }
       );
     case "BUILD_STORED_LIST":
-      return storedGames;
+      return storedGames.map((game) => ({ ...game, isVisible: true }));
 
     // FILTERS
     case "SORT_A_TO_Z":
