@@ -4,6 +4,7 @@
 // PS: if you do, remember to rename to [state, dispatch] in _app.js
 
 import Link from "next/link";
+import { Paper } from "@material-ui/core";
 import { useContext } from "react";
 import GamesContext from "./GamesContext";
 
@@ -24,9 +25,14 @@ const GameList = () => {
 
   return (
     <>
-      <div className="list">{gameListRender}</div>
+      <div className="list">
+        <Paper variant="elevation" elevation={12}>
+          {gameListRender}
+        </Paper>
+      </div>
       <style jsx>{`
         .list {
+          background-color: #ddd;
           margin: 10%;
           text-align: center;
         }
