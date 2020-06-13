@@ -6,27 +6,8 @@ import AddGameButton from "../../components/AddGameButton";
 import RemoveGameButton from "../../components/RemoveGameButton";
 import ChangePlatformButton from "../../components/ChangePlatformButton";
 import GamesContext from "../../components/GamesContext";
-
-// getStaticProps would have required getStaticPaths = revisit?
-export const getServerSideProps = async (context) => {
-  const { id } = context.query; // from /game/id
-
-  const url = `https://api.rawg.io/api/games/${id}`;
-  const { data } = await axios({
-    method: "get",
-    url,
-    headers: {
-      "User-Agent": "a-game-of-chance", // RAWG.io requires this for their API calls
-    },
-  });
-
-  return {
-    props: {
-      game: data,
-      id: parseInt(id, 10),
-    },
-  };
-};
+import withAuthUser from "../../utils/pageWrappers/withAuthUser";
+import withAuthUserInfo from "../../utils/pageWrappers/withAuthUserInfo";
 
 // currently displays name, description, and a related image
 // description property was in HTML format; needed html-react-parser to display text without <p> tags
@@ -55,6 +36,29 @@ const GamePage = ({ game, id }) => {
       )}
     </>
   );
+};
+
+// getStaticProps would have required getStaticPaths = revisit?
+GamePage.getInitialProps = async (context) => {
+  const { id } = context.query; // from /game/id
+
+  const url = `https://api.rawg.io/api/games/${id}`;
+  const { data } = await axios({
+    method: "get",
+    url,
+    headers: {
+      "User-Agent": "a-game-of-chance", // RAWG.io requires this for their API calls
+    },
+  });
+
+  console.log(data);
+
+  return {
+    props: {
+      game: data,
+      id: parseInt(id, 10),
+    },
+  };
 };
 
 export default GamePage;

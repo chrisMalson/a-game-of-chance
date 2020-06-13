@@ -4,6 +4,7 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
+import Router from "next/router";
 
 // imports by me, not Next.js
 import GamesContext from "../components/GamesContext";
@@ -14,11 +15,11 @@ import Header from "../components/Header";
 // necessary for hooks to work with next's class-based app component
 const ReducerWrapper = ({ children }) => {
   const [games, dispatch] = useReducer(gameListReducer, []);
+
   useEffect(() => {
     if (localStorage.getItem("games")) {
       const storedGames = JSON.parse(localStorage.getItem("games"));
       dispatch({ type: "BUILD_STORED_LIST", storedGames });
-      console.log("app.js useEffect triggered");
     }
   }, []);
 
@@ -66,3 +67,11 @@ export default class MyApp extends App {
     );
   }
 }
+
+MyApp.getServerSideProps = async (ctx) => {
+  const props = await App.getInitialProps(ctx);
+
+  console.log(props.pageProps.AuthUserInfo.AuthUser);
+
+  return { ...props };
+};

@@ -1,6 +1,8 @@
 import firebase from "../src/firebase";
 
-const SaveButton = () => {
+const SaveButton = (props) => {
+  console.log(props);
+
   const handleSave = () => {
     const database = firebase.database();
 

@@ -1,6 +1,5 @@
 import GamesContext from "./GamesContext";
 import { useContext } from "react";
-import SaveButton from "./SaveButton";
 
 const FilterOptions = () => {
   const { games, dispatch } = useContext(GamesContext);
@@ -30,7 +29,6 @@ const FilterOptions = () => {
         </option>
         {platformListRender}
       </select>
-      <SaveButton />
       <style jsx>{`
         margin: 5%;
       `}</style>

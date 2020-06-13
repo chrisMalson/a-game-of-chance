@@ -12,7 +12,7 @@
     "html-react-parser": "^0.10.2",
     "htmlparser2": "^4.1.0",
     "lodash": "^4.17.15",
-    "next": "latest",
+    "next": "^9.4.4",
     "now": "^17.0.4",
     "prop-types": "latest",
     "react": "latest",
