@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
+import Router from "next/router";
 
 import GameInfo from "../../components/GameInfo";
 import AddGameButton from "../../components/AddGameButton";
@@ -40,6 +41,10 @@ const GamePage = ({ game, id }) => {
 
 // getStaticProps would have required getStaticPaths = revisit?
 GamePage.getInitialProps = async (context) => {
+  if (!context.myCustomData.AuthUserInfo.AuthUser) {
+    Router.push("/");
+  }
+
   const { id } = context.query; // from /game/id
 
   const url = `https://api.rawg.io/api/games/${id}`;
@@ -51,14 +56,10 @@ GamePage.getInitialProps = async (context) => {
     },
   });
 
-  console.log(data);
-
   return {
-    props: {
-      game: data,
-      id: parseInt(id, 10),
-    },
+    game: data,
+    id: parseInt(id, 10),
   };
 };
 
-export default GamePage;
+export default withAuthUser(withAuthUserInfo(GamePage));
