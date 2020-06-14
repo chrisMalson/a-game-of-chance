@@ -42,7 +42,13 @@ const GamePage = ({ game, id }) => {
 // getStaticProps would have required getStaticPaths = revisit?
 GamePage.getInitialProps = async (context) => {
   if (!context.myCustomData.AuthUserInfo.AuthUser) {
-    Router.push("/");
+    if (context.res) {
+      context.res.writeHead(302, { Location: "/" });
+      context.res.end();
+      context.res.finished = true;
+    } else {
+      Router.push("/");
+    }
   }
 
   const { id } = context.query; // from /game/id
