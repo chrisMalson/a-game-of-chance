@@ -4,7 +4,7 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
-import Router from "next/router";
+import firebase from "../src/firebase";
 
 // imports by me, not Next.js
 import GamesContext from "../components/GamesContext";
@@ -15,6 +15,9 @@ import Header from "../components/Header";
 // necessary for hooks to work with next's class-based app component
 const ReducerWrapper = ({ children }) => {
   const [games, dispatch] = useReducer(gameListReducer, []);
+  const database = firebase.database();
+
+  console.log(children.props.AuthUserInfo);
 
   useEffect(() => {
     if (localStorage.getItem("games")) {

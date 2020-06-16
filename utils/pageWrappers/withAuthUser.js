@@ -18,7 +18,6 @@ export default function withAuthUser(ComposedComponent) {
     // the session. This allows us to server-render while also using Firebase's
     // client-side auth functionality.
     const { user: firebaseUser } = useFirebaseAuth();
-    console.log("number 4");
     const AuthUserFromClient = createAuthUser(firebaseUser);
     const { AuthUser: AuthUserFromSession, token } = AuthUserInfo;
     const AuthUser = AuthUserFromClient || AuthUserFromSession || null;

@@ -12,10 +12,9 @@ import { get, has } from "lodash/object";
  */
 export const createAuthUser = (firebaseUser) => {
   if (!firebaseUser || !firebaseUser.uid) {
-    console.log("number 3");
     return null;
   }
-  console.log("something else stupid");
+
   return {
     id: get(firebaseUser, "uid"),
     email: get(firebaseUser, "email"),
@@ -39,7 +38,6 @@ export const createAuthUserInfo = ({
   firebaseUser = null,
   token = null,
 } = {}) => {
-  console.log("something stupid");
   return {
     AuthUser: createAuthUser(firebaseUser),
     token,
