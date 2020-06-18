@@ -20,6 +20,7 @@ export const useAuthUserInfo = () => {
 export const useFirebaseAuth = () => {
   const [state, setState] = useState(async () => {
     const user = await firebase.auth().currentUser;
+
     return {
       initializing: !user,
       user,
