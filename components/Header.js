@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Typography } from "@material-ui/core";
 
+// this is a header...
 const Header = () => {
   return (
     <Link href="/">

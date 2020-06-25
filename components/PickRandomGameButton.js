@@ -1,7 +1,10 @@
-import { Modal } from "@material-ui/core";
 import { useState, useContext } from "react";
-import GamesContext from "../components/GamesContext";
+import { Modal } from "@material-ui/core";
 
+import GamesContext from "../context/GamesContext";
+
+// MaterialUI's Modal requires useState for open/closed functionality
+// The button will only pick visible games; any games filtered out by platform will not appear as a choice
 const PickRandomGameButton = () => {
   const { games } = useContext(GamesContext);
   const [open, setOpen] = useState(false);

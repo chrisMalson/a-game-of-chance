@@ -1,15 +1,12 @@
-// as of now, _app.js context provider has a value of { games, dispatch }
-// it may be better to use dispatch alone and have a RENDER_GAME_LIST action instead
-// just a note for future chris
-// PS: if you do, remember to rename to [state, dispatch] in _app.js
-
+import { useContext } from "react";
 import Link from "next/link";
 import { Paper } from "@material-ui/core";
-import { useContext } from "react";
-import GamesContext from "./GamesContext";
 
+import GamesContext from "../context/GamesContext";
+
+// pretty self-explanatory; this component renders the game list to the DOM
 const GameList = () => {
-  const { games, dispatch } = useContext(GamesContext);
+  const { games } = useContext(GamesContext);
 
   const gameListRender = games
     .filter((game) => game.isVisible)

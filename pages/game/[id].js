@@ -1,38 +1,18 @@
 import axios from "axios";
-import Router from "next/router";
 
-import { get } from "lodash/object";
 import GameInfo from "../../components/GameInfo";
-import withAuthUser from "../../utils/pageWrappers/withAuthUser";
-import withAuthUserInfo from "../../utils/pageWrappers/withAuthUserInfo";
-import ReducerWrapper from "../../utils/pageWrappers/ReducerWrapper";
+import GamesReducer from "../../utils/pageWrappers/GamesReducer";
 
-// currently displays name, description, and a related image
-// description property was in HTML format; needed html-react-parser to display text without <p> tags
-const GamePage = (props) => {
-  const { AuthUserInfo, game, id } = props;
-  const AuthUser = get(AuthUserInfo, "AuthUser", null);
-  const uid = AuthUser.id;
-
+const GamePage = ({ game, id }) => {
   return (
-    <ReducerWrapper uid={uid}>
+    <GamesReducer>
       <GameInfo game={game} id={id} />
-    </ReducerWrapper>
+    </GamesReducer>
   );
 };
 
-// getStaticProps would have required getStaticPaths = revisit?
+// getStaticProps would have required getStaticPaths = revisit? TODO
 GamePage.getInitialProps = async (context) => {
-  if (!context.myCustomData.AuthUserInfo.AuthUser) {
-    if (context.res) {
-      context.res.writeHead(302, { Location: "/" });
-      context.res.end();
-      context.res.finished = true;
-    } else {
-      Router.push("/");
-    }
-  }
-
   const { id } = context.query; // from /game/id
 
   const url = `https://api.rawg.io/api/games/${id}`;
@@ -50,4 +30,4 @@ GamePage.getInitialProps = async (context) => {
   };
 };
 
-export default withAuthUser(withAuthUserInfo(GamePage));
+export default GamePage;

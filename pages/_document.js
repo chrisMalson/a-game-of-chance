@@ -1,13 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { get } from "lodash/object";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
 import theme from "../src/theme";
 
 export default class MyDocument extends Document {
   render() {
-    const { AuthUserInfo } = this.props;
     return (
       <Html>
         <Head>
@@ -16,13 +13,6 @@ export default class MyDocument extends Document {
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
-          <script
-            id="__MY_AUTH_USER_INFO"
-            type="application/json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(AuthUserInfo, null, 2),
-            }}
           />
         </Head>
         <body>
@@ -66,8 +56,6 @@ MyDocument.getInitialProps = async (ctx) => {
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });
 
-  const AuthUserInfo = get(ctx, "myCustomData.AuthUserInfo", null);
-
   const initialProps = await Document.getInitialProps(ctx);
 
   return {
@@ -77,17 +65,5 @@ MyDocument.getInitialProps = async (ctx) => {
       ...React.Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
     ],
-    AuthUserInfo,
   };
-};
-
-MyDocument.propTypes = {
-  AuthUserInfo: PropTypes.shape({
-    AuthUser: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired,
-      emailVerified: PropTypes.bool.isRequired,
-    }),
-    token: PropTypes.string,
-  }).isRequired,
 };

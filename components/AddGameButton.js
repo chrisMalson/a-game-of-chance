@@ -1,11 +1,10 @@
-// separate component for clarity
-// it may make more sense to have a separate actions file and import that,
-// to eliminate the need for multiple useContext calls. Revisit?
-
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import GamesContext from "./GamesContext";
 
+import GamesContext from "../context/GamesContext";
+
+// renders a button that adds game to list with selectable platform
+// lists only available platforms from data fetched via API call
 const AddGameButton = ({ game }) => {
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);

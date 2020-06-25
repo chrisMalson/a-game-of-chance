@@ -1,6 +1,13 @@
-import GamesContext from "./GamesContext";
 import { useContext } from "react";
 
+import GamesContext from "../context/GamesContext";
+
+// filter options include the following:
+// 1. sort games A to Z, and from Z to A
+// 2. filters games by platform
+//
+// TODO: more filter options, refactor alphabetical into singular function, allow multiple selected platforms
+// ... and maybe store timestamps? but I'm not sure that'll be particularly useful
 const FilterOptions = () => {
   const { games, dispatch } = useContext(GamesContext);
 

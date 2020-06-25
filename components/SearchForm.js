@@ -1,6 +1,7 @@
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
+// TODO: better search filtering; right now any text will be submitted without vetting first
 const SearchForm = () => {
   const router = useRouter();
 

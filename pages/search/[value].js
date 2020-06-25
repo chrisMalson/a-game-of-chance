@@ -1,14 +1,10 @@
 import axios from "axios";
 import Link from "next/link";
-import Router from "next/router";
 
-import withAuthUser from "../../utils/pageWrappers/withAuthUser";
-import withAuthUserInfo from "../../utils/pageWrappers/withAuthUserInfo";
-
-const Search = (props) => {
+const Search = ({ games }) => {
   // converts results of API call into clickable elements
   // displays name, database ID, rating (to verify sort order), and first platform in array
-  const searchResults = props.games.map((game) => (
+  const searchResults = games.map((game) => (
     <Link key={game.id} href="/game/[id]" as={`/game/${game.id}`}>
       <a>
         {game.name}, {game.id}, {game.rating}, {game.platforms[0].platform.name}
@@ -33,16 +29,6 @@ const Search = (props) => {
 
 // getStaticProps would have required getStaticPaths = revisit?
 Search.getInitialProps = async (context) => {
-  if (!context.myCustomData.AuthUserInfo.AuthUser) {
-    if (context.res) {
-      context.res.writeHead(302, { Location: "/" });
-      context.res.end();
-      context.res.finished = true;
-    } else {
-      Router.push("/");
-    }
-  }
-
   const { value } = context.query; // from /search/[value]
   const url = `https://api.rawg.io/api/games?search=${value}&page_size=10`; //revisit page size
   const { data } = await axios({
@@ -60,4 +46,4 @@ Search.getInitialProps = async (context) => {
   };
 };
 
-export default withAuthUser(withAuthUserInfo(Search));
+export default Search;

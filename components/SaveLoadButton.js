@@ -1,8 +1,11 @@
-import firebase from "../src/firebase";
 import { Button, Modal } from "@material-ui/core";
 import { useState } from "react";
 
-const SaveLoadButton = ({ AuthUser }) => {
+import firebase from "../src/firebase";
+
+// test component to ensure firebase works as expected
+// the idea was to have different save slots for multiple lists; that may just end up on the roadmap though
+const SaveLoadButton = () => {
   const [open, setOpen] = useState(false);
   const [fileNum, setFileNum] = useState(0);
 
@@ -12,7 +15,7 @@ const SaveLoadButton = ({ AuthUser }) => {
     const randomNumber = Math.floor(Math.random() * 100);
 
     if (fileNum !== 0) {
-      database.ref(`${AuthUser.id}/${fileNum}`).set({ randomNumber });
+      database.ref(`/${fileNum}`).set({ randomNumber });
     } else {
       alert("pick a save file first!");
     }

@@ -1,14 +1,12 @@
-// separate component for clarity
-// it may make more sense to have a separate actions file and import that,
-// to eliminate the need for multiple useContext calls. Revisit?
-
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import GamesContext from "./GamesContext";
 
+import GamesContext from "../context/GamesContext";
+
+// removes the game when you click the button
 const RemoveGameButton = ({ game }) => {
   const router = useRouter();
-  const { games, dispatch } = useContext(GamesContext);
+  const { dispatch } = useContext(GamesContext);
   const { id } = game;
 
   const handleRemoveGame = () => {
