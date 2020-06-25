@@ -4,32 +4,33 @@ import firebase from "../../src/firebase";
 
 import GamesContext from "../../components/GamesContext";
 import gameListReducer from "../../reducers/gameList";
-import { useFirebaseAuth } from "../auth/hooks";
 
-const ReducerWrapper = ({ children }) => {
+const ReducerWrapper = (props) => {
   const [games, dispatch] = useReducer(gameListReducer, []);
   const database = firebase.database();
 
-  const getAuthUserId = () => {
-    const { user } = useFirebaseAuth();
+  const { children, uid } = props;
 
-    if (user) {
-      return user.uid;
-    }
-  };
+  const authId = uid || "default";
 
-  const authId = getAuthUserId() || "default";
-
-  console.log(authId);
+  console.log(uid);
 
   useEffect(() => {
     (async () => {
-      const storedGames =
-        authId !== "default"
-          ? await database.ref(`${authId}/`).once("value")
-          : JSON.parse(localStorage.getItem("games"));
+      let storedGames;
 
-      dispatch({ type: "BUILD_STORED_LIST", storedGames });
+      if (authId !== "default") {
+        const snapshot = await database.ref(`${authId}/`).once("value");
+        storedGames = await snapshot.val();
+      } else if (!localStorage.getItem("games")) {
+        storedGames = JSON.parse(localStorage.getItem("games"));
+      }
+
+      console.log(storedGames);
+
+      if (storedGames) {
+        dispatch({ type: "BUILD_STORED_LIST", storedGames });
+      }
     })();
   }, []);
 
@@ -49,4 +50,5 @@ const ReducerWrapper = ({ children }) => {
     </GamesContext.Provider>
   );
 };
+
 export default ReducerWrapper;

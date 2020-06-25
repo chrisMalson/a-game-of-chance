@@ -7,10 +7,12 @@ import GameList from "../components/GameList";
 import FilterOptions from "../components/FilterOptions";
 import PickRandomGameButton from "../components/PickRandomGameButton";
 import UserBar from "../components/UserBar";
+import ReducerWrapper from "../utils/pageWrappers/ReducerWrapper";
 
 const Index = (props) => {
   const { AuthUserInfo } = props;
   const AuthUser = get(AuthUserInfo, "AuthUser", null);
+  const uid = AuthUser.id;
 
   return (
     <div>
@@ -18,12 +20,12 @@ const Index = (props) => {
       {!AuthUser ? (
         <></>
       ) : (
-        <>
+        <ReducerWrapper uid={uid}>
           <SearchForm />
           <PickRandomGameButton />
           <FilterOptions />
           <GameList />
-        </>
+        </ReducerWrapper>
       )}
     </div>
   );
