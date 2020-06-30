@@ -1,14 +1,9 @@
 import axios from "axios";
 
 import GameInfo from "../../components/GameInfo";
-import GamesReducer from "../../utils/pageWrappers/GamesReducer";
 
 const GamePage = ({ game, id }) => {
-  return (
-    <GamesReducer>
-      <GameInfo game={game} id={id} />
-    </GamesReducer>
-  );
+  return <GameInfo game={game} id={id} />;
 };
 
 // getStaticProps would have required getStaticPaths = revisit? TODO

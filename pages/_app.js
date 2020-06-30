@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Header from "../components/Header";
 import theme from "../src/theme";
+import GamesReducer from "../utils/pageWrappers/GamesReducer";
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -32,7 +33,9 @@ export default class MyApp extends App {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <Header />
-          <Component {...pageProps} />
+          <GamesReducer>
+            <Component {...pageProps} />
+          </GamesReducer>
         </ThemeProvider>
       </>
     );
