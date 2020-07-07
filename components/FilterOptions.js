@@ -1,4 +1,12 @@
 import { useContext } from "react";
+import {
+  Button,
+  ButtonGroup,
+  Typography,
+  Grid,
+  Select,
+} from "@material-ui/core";
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
 import GamesContext from "../context/GamesContext";
 
@@ -27,19 +35,22 @@ const FilterOptions = () => {
     dispatch({ type: "SORT_BY_PLATFORM", platform: e.target.value });
 
   return (
-    <div>
-      <button onClick={handleSortAtoZ}>Sort A to Z</button>
-      <button onClick={handleSortZtoA}>Sort Z to A</button>
-      <select defaultValue={"all-platforms"} onChange={handleSortByPlatform}>
+    <Grid container justify="space-between">
+      <Select defaultValue={"all-platforms"} onChange={handleSortByPlatform}>
         <option key="all-platforms" value="all-platforms">
           All Platforms
         </option>
         {platformListRender}
-      </select>
-      <style jsx>{`
-        margin: 5%;
-      `}</style>
-    </div>
+      </Select>
+      <ButtonGroup variant="contained" color="primary">
+        <Button onClick={handleSortAtoZ}>
+          <Typography variant="h6">A {<ArrowRightAltIcon />} Z</Typography>
+        </Button>
+        <Button onClick={handleSortZtoA}>
+          <Typography variant="h6">Z {<ArrowRightAltIcon />} A</Typography>
+        </Button>
+      </ButtonGroup>
+    </Grid>
   );
 };
 

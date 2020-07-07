@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { Box } from "@material-ui/core";
 import { useUser } from "../utils/auth/useUser";
 
 const AuthIndex = () => {
@@ -6,7 +8,7 @@ const AuthIndex = () => {
 
   if (!user) {
     return (
-      <>
+      <Box>
         <p>Hi there!</p>
         <p>
           You are not signed in.{" "}
@@ -14,14 +16,14 @@ const AuthIndex = () => {
             <a>Sign in</a>
           </Link>
         </p>
-      </>
+      </Box>
     );
   }
 
   return (
     <div>
-      <div>
-        <p>You're signed in. ID: {user.id}</p>
+      <Box>
+        <p>You're signed in as {user.email}</p>
         <p
           style={{
             display: "inlinelock",
@@ -33,7 +35,7 @@ const AuthIndex = () => {
         >
           Log out
         </p>
-      </div>
+      </Box>
     </div>
   );
 };

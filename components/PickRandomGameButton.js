@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Modal } from "@material-ui/core";
+import { Button, Modal } from "@material-ui/core";
 
 import GamesContext from "../context/GamesContext";
 
@@ -24,14 +24,19 @@ const PickRandomGameButton = () => {
 
   return (
     <>
-      <button onClick={handleChooseGame}>
+      <Button
+        fullWidth
+        size="large"
+        variant="contained"
+        onClick={handleChooseGame}
+      >
         <h3>Choose a game for me to play!</h3>
-      </button>
+      </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         {
           <div style={{ background: "white", textAlign: "center" }}>
             <h4>You should play</h4>
-            <h2>{chosenGame}</h2>
+            <h3>{chosenGame}</h3>
           </div>
         }
       </Modal>

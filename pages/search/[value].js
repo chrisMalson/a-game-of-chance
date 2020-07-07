@@ -1,9 +1,13 @@
 import axios from "axios";
 import Link from "next/link";
 
+import Header from "../../components/Header";
+
 const Search = ({ games }) => {
   // converts results of API call into clickable elements
   // displays name, database ID, rating (to verify sort order), and first platform in array
+  console.log(games);
+
   const searchResults = games.map((game) => (
     <Link key={game.id} href="/game/[id]" as={`/game/${game.id}`}>
       <a>
@@ -14,6 +18,7 @@ const Search = ({ games }) => {
 
   return (
     <>
+      <Header />
       <div className="container">{searchResults}</div>
       <style jsx>{`
         .container {
@@ -30,7 +35,7 @@ const Search = ({ games }) => {
 // getStaticProps would have required getStaticPaths = revisit?
 Search.getInitialProps = async (context) => {
   const { value } = context.query; // from /search/[value]
-  const url = `https://api.rawg.io/api/games?search=${value}&page_size=10`; //revisit page size
+  const url = `https://api.rawg.io/api/games?search=${value}&page_size=10`; // TODO: revisit page size
   const { data } = await axios({
     method: "get",
     url,

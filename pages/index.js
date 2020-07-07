@@ -1,22 +1,17 @@
 import { useUser } from "../utils/auth/useUser";
-import AuthIndex from "../components/AuthIndex";
-import SearchForm from "../components/SearchForm";
+import Header from "../components/Header";
 import GameList from "../components/GameList";
-import FilterOptions from "../components/FilterOptions";
 import PickRandomGameButton from "../components/PickRandomGameButton";
 
 const Index = () => {
   const { user } = useUser();
-  console.log(user);
 
   return (
     <div>
-      <AuthIndex />
+      <Header />
       {user && (
         <>
-          <SearchForm />
           <PickRandomGameButton />
-          <FilterOptions />
           <GameList />
         </>
       )}

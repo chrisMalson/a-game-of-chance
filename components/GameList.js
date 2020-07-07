@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import Link from "next/link";
-import { Paper } from "@material-ui/core";
+import { Box, Paper, Grid, GridList, GridListTile } from "@material-ui/core";
 
+import FilterOptions from "../components/FilterOptions";
 import GamesContext from "../context/GamesContext";
+
+// TODO: store link to image in database along with rest of info, to use in gameList render
 
 // pretty self-explanatory; this component renders the game list to the DOM
 const GameList = () => {
@@ -11,30 +14,26 @@ const GameList = () => {
   const gameListRender = games
     .filter((game) => game.isVisible)
     .map((game) => (
-      <h4 key={game.id}>
-        <Link href="/game/[id]" as={`/game/${game.id}`}>
-          <a>
-            {game.name} - {game.platform}
-          </a>
-        </Link>
-      </h4>
+      <Box bgcolor="gray" border={1}>
+        <GridListTile key={game.id}>
+          <Link href="/game/[id]" as={`/game/${game.id}`}>
+            <a>
+              {game.name} - {game.platform}
+            </a>
+          </Link>
+        </GridListTile>
+      </Box>
     ));
 
   return (
-    <>
-      <div className="list">
-        <Paper variant="elevation" elevation={12}>
-          {gameListRender}
+    <Grid container justify="center">
+      <Grid item xs={10} sm={8} md={6}>
+        <Paper variant="outlined">
+          <FilterOptions />
+          <GridList>{gameListRender}</GridList>
         </Paper>
-      </div>
-      <style jsx>{`
-        .list {
-          background-color: #ddd;
-          margin: 10%;
-          text-align: center;
-        }
-      `}</style>
-    </>
+      </Grid>
+    </Grid>
   );
 };
 

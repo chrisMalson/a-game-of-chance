@@ -19,23 +19,18 @@ const SearchForm = () => {
 
   return (
     <>
-      <div className="container">
-        <h1>Search for a game...</h1>
+      <div>
         <form onSubmit={handleSearchSubmit}>
-          <input type="text" onChange={onChange}></input>
+          <input
+            type="text"
+            onChange={onChange}
+            placeholder="Search for a game..."
+          ></input>
           <button type="submit" value="submit">
-            Submit
+            SEARCH
           </button>
         </form>
       </div>
-      <style jsx>{`
-        .container {
-          justify-content: center;
-          display: flex;
-          flex-direction: column;
-          margin: 5%;
-        }
-      `}</style>
     </>
   );
 };

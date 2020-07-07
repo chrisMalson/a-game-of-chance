@@ -1,6 +1,7 @@
 import React from "react";
 import App from "next/app";
 import Head from "next/head";
+import { Box } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -21,7 +22,7 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <>
+      <Box>
         <Head>
           <title>A Game of Chance</title>
           <meta
@@ -32,12 +33,11 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Header />
           <GamesReducer>
             <Component {...pageProps} />
           </GamesReducer>
         </ThemeProvider>
-      </>
+      </Box>
     );
   }
 }

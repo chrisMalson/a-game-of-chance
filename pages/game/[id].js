@@ -1,9 +1,17 @@
 import axios from "axios";
 
+import Header from "../../components/Header";
 import GameInfo from "../../components/GameInfo";
 
 const GamePage = ({ game, id }) => {
-  return <GameInfo game={game} id={id} />;
+  console.log(game);
+
+  return (
+    <>
+      <Header />
+      <GameInfo game={game} id={id} />
+    </>
+  );
 };
 
 // getStaticProps would have required getStaticPaths = revisit? TODO
