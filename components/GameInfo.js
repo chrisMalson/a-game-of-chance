@@ -24,7 +24,7 @@ const GameInfo = ({ game, id }) => {
   return (
     <Paper>
       <Grid container direction="column">
-        <Typography variant="h1">{game.name}</Typography>
+        <Typography variant="h3">{game.name}</Typography>
         <img
           style={{ width: "300px", height: "200px" }}
           src={game.background_image}

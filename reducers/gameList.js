@@ -1,15 +1,21 @@
-const gameListReducer = (state, { type, name, id, platform, storedGames }) => {
+const gameListReducer = (
+  state,
+  { type, name, id, platform, background_image, storedGames }
+) => {
   switch (type) {
     // LIST MANAGEMENT
     case "ADD_GAME":
-      return [...state, { name, id, platform, isVisible: true }]; // id will likely be used for element key purposes
+      return [
+        ...state,
+        { name, id, platform, background_image, isVisible: true },
+      ]; // id will likely be used for element key purposes
     case "REMOVE_GAME":
       return state.filter((game) => game.id !== id);
     case "CHANGE_PLATFORM":
       return state.map((game) =>
         game.id !== id
           ? { ...game, isVisible: true }
-          : { name, id, platform, isVisible: true }
+          : { name, id, platform, background_image, isVisible: true }
       );
     case "BUILD_STORED_LIST":
       return storedGames.map((game) => ({ ...game, isVisible: true }));

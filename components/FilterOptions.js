@@ -36,20 +36,24 @@ const FilterOptions = () => {
 
   return (
     <Grid container justify="space-between">
-      <Select defaultValue={"all-platforms"} onChange={handleSortByPlatform}>
-        <option key="all-platforms" value="all-platforms">
-          All Platforms
-        </option>
-        {platformListRender}
-      </Select>
-      <ButtonGroup variant="contained" color="primary">
-        <Button onClick={handleSortAtoZ}>
-          <Typography variant="h6">A {<ArrowRightAltIcon />} Z</Typography>
-        </Button>
-        <Button onClick={handleSortZtoA}>
-          <Typography variant="h6">Z {<ArrowRightAltIcon />} A</Typography>
-        </Button>
-      </ButtonGroup>
+      <Grid item xs={8}>
+        <Select defaultValue={"all-platforms"} onChange={handleSortByPlatform}>
+          <option key="all-platforms" value="all-platforms">
+            All Platforms
+          </option>
+          {platformListRender}
+        </Select>
+      </Grid>
+      <Grid item xs={4}>
+        <ButtonGroup variant="contained" color="primary">
+          <Button onClick={handleSortAtoZ}>
+            <Typography variant="h6">A {<ArrowRightAltIcon />} Z</Typography>
+          </Button>
+          <Button onClick={handleSortZtoA}>
+            <Typography variant="h6">Z {<ArrowRightAltIcon />} A</Typography>
+          </Button>
+        </ButtonGroup>
+      </Grid>
     </Grid>
   );
 };

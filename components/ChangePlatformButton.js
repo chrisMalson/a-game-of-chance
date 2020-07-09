@@ -9,7 +9,7 @@ import GamesContext from "../context/GamesContext";
 const ChangePlatformButton = ({ game, currentPlatform }) => {
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);
-  const { name, id } = game;
+  const { name, id, background_image } = game;
 
   const [newPlatform, setNewPlatform] = useState(currentPlatform);
 
@@ -20,7 +20,13 @@ const ChangePlatformButton = ({ game, currentPlatform }) => {
   ));
 
   const handleChangePlatform = () => {
-    dispatch({ type: "CHANGE_PLATFORM", name, id, platform: newPlatform });
+    dispatch({
+      type: "CHANGE_PLATFORM",
+      name,
+      id,
+      background_image,
+      platform: newPlatform,
+    });
     router.push("/");
   };
 

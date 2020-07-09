@@ -9,7 +9,7 @@ import GamesContext from "../context/GamesContext";
 const AddGameButton = ({ game }) => {
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);
-  const { name, id } = game;
+  const { name, id, background_image } = game;
   const [platform, setPlatform] = useState(game.platforms[0].platform.name);
 
   const availablePlatforms = game.platforms.map((i) => (
@@ -19,7 +19,7 @@ const AddGameButton = ({ game }) => {
   ));
 
   const handleAddGame = () => {
-    dispatch({ type: "ADD_GAME", name, id, platform });
+    dispatch({ type: "ADD_GAME", name, id, platform, background_image });
     router.push("/");
   };
 
