@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Button, Modal } from "@material-ui/core";
+import { Fab, Grid, Modal, Typography } from "@material-ui/core";
 
 import GamesContext from "../context/GamesContext";
 
@@ -23,15 +23,17 @@ const PickRandomGameButton = () => {
   };
 
   return (
-    <>
-      <Button
-        fullWidth
-        size="large"
-        variant="contained"
-        onClick={handleChooseGame}
-      >
-        <h3>Choose a game for me to play!</h3>
-      </Button>
+    <Grid container spacing={1} justify="center">
+      <Grid item>
+        <Fab
+          size="large"
+          variant="extended"
+          color="primary"
+          onClick={handleChooseGame}
+        >
+          <Typography variant="h6">Choose a game to play!</Typography>
+        </Fab>
+      </Grid>
       <Modal open={open} onClose={() => setOpen(false)}>
         {
           <div style={{ background: "white", textAlign: "center" }}>
@@ -43,7 +45,7 @@ const PickRandomGameButton = () => {
       <style jsx>{`
         margin: 5%;
       `}</style>
-    </>
+    </Grid>
   );
 };
 

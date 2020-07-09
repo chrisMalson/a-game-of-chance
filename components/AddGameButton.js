@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
+import { Button, NativeSelect } from "@material-ui/core";
 
 import GamesContext from "../context/GamesContext";
 
@@ -26,8 +27,10 @@ const AddGameButton = ({ game }) => {
 
   return (
     <>
-      <select onChange={handleChoosePlatform}>{availablePlatforms}</select>
-      <button onClick={handleAddGame}>Add Game to List</button>
+      <NativeSelect variant="outlined" onChange={handleChoosePlatform}>
+        {availablePlatforms}
+      </NativeSelect>
+      <Button onClick={handleAddGame}>Add Game to List</Button>
     </>
   );
 };

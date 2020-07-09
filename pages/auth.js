@@ -1,14 +1,15 @@
-import FirebaseAuth from '../components/FirebaseAuth'
+import FirebaseAuth from "../components/FirebaseAuth";
+import HeaderSimple from "../components/HeaderSimple";
 
 const Auth = () => {
   return (
     <div>
-      <p>Sign in</p>
+      <HeaderSimple />
       <div>
         <FirebaseAuth />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Auth
+export default Auth;

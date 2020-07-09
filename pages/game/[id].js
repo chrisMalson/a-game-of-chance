@@ -4,8 +4,6 @@ import Header from "../../components/Header";
 import GameInfo from "../../components/GameInfo";
 
 const GamePage = ({ game, id }) => {
-  console.log(game);
-
   return (
     <>
       <Header />

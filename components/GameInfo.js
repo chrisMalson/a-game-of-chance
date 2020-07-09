@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Typography, Paper, Grid } from "@material-ui/core";
 import parse from "html-react-parser"; // used to parse HTML format into plain text for use with JSX
 
 import AddGameButton from "./AddGameButton";
@@ -21,27 +22,29 @@ const GameInfo = ({ game, id }) => {
   const hasMultiplePlatforms = game.platforms.length > 1;
 
   return (
-    <>
-      <h1>{game.name}</h1>
-      {parse(game.description)}
-      <img
-        style={{ width: "300px", height: "200px" }}
-        src={game.background_image}
-      />
-      {isOnList.length === 0 ? (
-        <AddGameButton game={game} />
-      ) : (
-        <>
-          {hasMultiplePlatforms && (
-            <ChangePlatformButton
-              game={game}
-              currentPlatform={currentPlatform}
-            />
-          )}
-          <RemoveGameButton game={game} />
-        </>
-      )}
-    </>
+    <Paper>
+      <Grid container direction="column">
+        <Typography variant="h1">{game.name}</Typography>
+        <img
+          style={{ width: "300px", height: "200px" }}
+          src={game.background_image}
+        />
+        <Typography variant="body1">{parse(game.description)}</Typography>
+        {isOnList.length === 0 ? (
+          <AddGameButton game={game} />
+        ) : (
+          <>
+            {hasMultiplePlatforms && (
+              <ChangePlatformButton
+                game={game}
+                currentPlatform={currentPlatform}
+              />
+            )}
+            <RemoveGameButton game={game} />
+          </>
+        )}
+      </Grid>
+    </Paper>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import { Button } from "@material-ui/core";
 
 import GamesContext from "../context/GamesContext";
 
@@ -15,7 +16,7 @@ const RemoveGameButton = ({ game }) => {
     router.push("/");
   };
 
-  return <button onClick={handleRemoveGame}>Remove Game</button>;
+  return <Button onClick={handleRemoveGame}>Remove Game</Button>;
 };
 
 export default RemoveGameButton;

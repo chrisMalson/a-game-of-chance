@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-import { Box } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Link as MaterialLink,
+  Typography,
+} from "@material-ui/core";
 import { useUser } from "../utils/auth/useUser";
 
 const AuthIndex = () => {
@@ -12,9 +17,13 @@ const AuthIndex = () => {
         <p>Hi there!</p>
         <p>
           You are not signed in.{" "}
-          <Link href={"/auth"}>
-            <a>Sign in</a>
-          </Link>
+          <Button variant="contained">
+            <Link href={"/auth"}>
+              <MaterialLink underline="none">
+                <Typography color="primary">Log in</Typography>
+              </MaterialLink>
+            </Link>
+          </Button>
         </p>
       </Box>
     );
@@ -24,17 +33,13 @@ const AuthIndex = () => {
     <div>
       <Box>
         <p>You're signed in as {user.email}</p>
-        <p
-          style={{
-            display: "inlinelock",
-            color: "blue",
-            textDecoration: "underline",
-            cursor: "pointer",
-          }}
+        <Button
+          variant="contained"
+          color="textPrimary"
           onClick={() => logout()}
         >
-          Log out
-        </p>
+          <Typography color="primary">Log out</Typography>
+        </Button>
       </Box>
     </div>
   );

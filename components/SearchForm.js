@@ -1,5 +1,14 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import {
+  FormControl,
+  FormHelperText,
+  Button,
+  FilledInput,
+  Typography,
+  Grid,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 // TODO: better search filtering; right now any text will be submitted without vetting first
 const SearchForm = () => {
@@ -18,20 +27,30 @@ const SearchForm = () => {
   };
 
   return (
-    <>
-      <div>
-        <form onSubmit={handleSearchSubmit}>
-          <input
-            type="text"
-            onChange={onChange}
-            placeholder="Search for a game..."
-          ></input>
-          <button type="submit" value="submit">
-            SEARCH
-          </button>
-        </form>
-      </div>
-    </>
+    <Grid container>
+      <form onSubmit={handleSearchSubmit}>
+        <FormControl required>
+          <Grid item xs={9}>
+            <FormHelperText>
+              <Typography color="textSecondary">
+                Search for a game...
+              </Typography>
+            </FormHelperText>
+            <FilledInput
+              required
+              variant="filled"
+              type="text"
+              onChange={onChange}
+            ></FilledInput>
+          </Grid>
+          <Grid item xs={3}>
+            <Button variant="contained" type="submit" value="submit">
+              <SearchIcon />
+            </Button>
+          </Grid>
+        </FormControl>
+      </form>
+    </Grid>
   );
 };
 
