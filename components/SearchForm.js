@@ -30,7 +30,7 @@ const SearchForm = () => {
     <Grid container>
       <form onSubmit={handleSearchSubmit}>
         <FormControl required>
-          <Grid item xs={9}>
+          <Grid item>
             <FormHelperText>
               <Typography color="textSecondary">
                 Search for a game...
@@ -43,7 +43,7 @@ const SearchForm = () => {
               onChange={onChange}
             ></FilledInput>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item>
             <Button variant="contained" type="submit" value="submit">
               <SearchIcon />
             </Button>

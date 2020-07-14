@@ -1,7 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import {
-  Box,
   Paper,
   Grid,
   GridList,
@@ -10,6 +9,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
+import { Pagination } from "@material-ui/lab";
 
 import FilterOptions from "../components/FilterOptions";
 import GamesContext from "../context/GamesContext";
@@ -19,7 +19,12 @@ import GamesContext from "../context/GamesContext";
 // pretty self-explanatory; this component renders the game list to the DOM
 const GameList = () => {
   const { games } = useContext(GamesContext);
+  const [page, setPage] = useState(1);
+
   const columns = useMediaQuery("(min-width:600px)") ? 2 : 1;
+
+  // sets page to 1 when games changes
+  useEffect(() => setPage(1), [games]);
 
   const gameListRender = games
     .filter((game) => game.isVisible)
@@ -42,15 +47,39 @@ const GameList = () => {
       </GridListTile>
     ));
 
+  const s = games.length !== 1 ? "s" : "";
+
+  const pageSize = 10; // TODO: variable page sizes selectable by user
+  const pageCount = Math.ceil(gameListRender.length / pageSize);
+
+  const handleChangePage = (e, val) => {
+    setPage(val);
+  };
+
   return (
-    <Grid container direction="row" justify="center">
-      <Grid item xs={10} sm={8} md={6}>
-        <Paper variant="outlined">
-          <FilterOptions />
-          <GridList cols={columns}>{gameListRender}</GridList>
-        </Paper>
+    <>
+      <Typography align="center" variant="h4" gutterBottom>
+        {games.length} game{s} backlogged:
+      </Typography>
+      <Grid container direction="row" justify="center">
+        <Grid item xs={10} sm={8} md={6}>
+          <Paper variant="outlined">
+            <FilterOptions />
+            <GridList cols={columns}>
+              {gameListRender.slice(
+                pageSize * page - pageSize,
+                pageSize * page
+              )}
+            </GridList>
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChangePage}
+            />
+          </Paper>
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   );
 };
 

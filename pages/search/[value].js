@@ -41,7 +41,9 @@ const Search = ({ games, value }) => {
     <>
       <Header />
       <Box />
-      <Typography variant="h4">Search results for "{value}"</Typography>
+      <Typography variant="h4" align="center" gutterBottom>
+        Search results for "{value}"
+      </Typography>
       <Grid container direction="row" justify="center">
         <Grid item xs={10} sm={8} md={6}>
           <Paper variant="outlined">
