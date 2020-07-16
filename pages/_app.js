@@ -4,10 +4,18 @@ import Head from "next/head";
 import { Box } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import dynamic from "next/dynamic";
 
-import Header from "../components/Header";
 import theme from "../src/theme";
+import "../src/nprogress.css";
 import GamesReducer from "../utils/pageWrappers/GamesReducer";
+
+const LoaderBar = dynamic(
+  () => {
+    return import("../components/LoaderBar");
+  },
+  { ssr: false }
+);
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -34,6 +42,7 @@ export default class MyApp extends App {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <GamesReducer>
+            <LoaderBar />
             <Component {...pageProps} />
           </GamesReducer>
         </ThemeProvider>

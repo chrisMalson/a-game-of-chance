@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
   Typography,
   Grid,
   Select,
+  FormControl,
 } from "@material-ui/core";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 
@@ -17,6 +18,14 @@ import GamesContext from "../context/GamesContext";
 // TODO: more filter options, refactor alphabetical into singular function, allow multiple selected platforms
 // ... and maybe store timestamps? but I'm not sure that'll be particularly useful
 const FilterOptions = () => {
+  const [selectedPlatform, setSelectedPlatform] = useState("all-platforms");
+
+  useEffect(() => {
+    if (localStorage.getItem("selectedPlatform")) {
+      setSelectedPlatform(localStorage.getItem("selectedPlatform"));
+    }
+  }, []);
+
   const { games, dispatch } = useContext(GamesContext);
 
   const platformList = [...new Set(games.map(({ platform }) => platform))];
@@ -31,18 +40,26 @@ const FilterOptions = () => {
 
   const handleSortZtoA = () => dispatch({ type: "SORT_Z_TO_A" });
 
-  const handleSortByPlatform = (e) =>
-    dispatch({ type: "SORT_BY_PLATFORM", platform: e.target.value });
+  const handleSortByPlatform = (e) => {
+    const newPlatform = e.target.value;
+
+    localStorage.setItem("selectedPlatform", newPlatform);
+    setSelectedPlatform(newPlatform);
+    console.log(selectedPlatform);
+    dispatch({ type: "SORT_BY_PLATFORM", platform: newPlatform });
+  };
 
   return (
     <Grid container justify="space-between">
       <Grid item xs={8}>
-        <Select defaultValue={"all-platforms"} onChange={handleSortByPlatform}>
-          <option key="all-platforms" value="all-platforms">
-            All Platforms
-          </option>
-          {platformListRender}
-        </Select>
+        <FormControl>
+          <Select value={selectedPlatform} onChange={handleSortByPlatform}>
+            <option key="all-platforms" value="all-platforms">
+              All Platforms
+            </option>
+            {platformListRender}
+          </Select>
+        </FormControl>
       </Grid>
       <Grid item xs={4}>
         <ButtonGroup variant="contained" color="primary">
