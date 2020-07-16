@@ -2,12 +2,14 @@ import axios from "axios";
 
 import Header from "../../components/Header";
 import GameInfo from "../../components/GameInfo";
+import ReturnToTopButton from "../../components/ReturnToTopButton";
 
 const GamePage = ({ game, id }) => {
   return (
     <>
       <Header />
       <GameInfo game={game} id={id} />
+      <ReturnToTopButton />
     </>
   );
 };

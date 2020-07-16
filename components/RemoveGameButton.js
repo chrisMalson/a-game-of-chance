@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
-import { Button } from "@material-ui/core";
+import { Button, Dialog, DialogTitle, DialogActions } from "@material-ui/core";
 
 import GamesContext from "../context/GamesContext";
 
@@ -9,6 +9,7 @@ const RemoveGameButton = ({ game }) => {
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);
   const { id } = game;
+  const [open, setOpen] = useState(false);
 
   const handleRemoveGame = () => {
     dispatch({ type: "REMOVE_GAME", id });
@@ -16,7 +17,22 @@ const RemoveGameButton = ({ game }) => {
     router.push("/");
   };
 
-  return <Button onClick={handleRemoveGame}>Remove Game</Button>;
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Remove Game</Button>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogActions>
+          <Button autoFocus variant="contained" onClick={() => setOpen(false)}>
+            Keep Game
+          </Button>
+          <Button variant="outlined" onClick={handleRemoveGame}>
+            Remove Game
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 };
 
 export default RemoveGameButton;

@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import Header from "../../components/Header";
+import ReturnToTopButton from "../../components/ReturnToTopButton";
 
 const Search = ({ games, value }) => {
   // converts results of API call into clickable elements
@@ -51,6 +52,7 @@ const Search = ({ games, value }) => {
           </Paper>
         </Grid>
       </Grid>
+      <ReturnToTopButton />
     </>
   );
 };

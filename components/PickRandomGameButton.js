@@ -36,10 +36,7 @@ const PickRandomGameButton = () => {
       </Grid>
       <Modal open={open} onClose={() => setOpen(false)}>
         {
-          <Paper
-            onClick={() => setOpen(false)}
-            style={{ background: "white", textAlign: "center" }}
-          >
+          <Paper onClick={() => setOpen(false)} style={{ textAlign: "center" }}>
             <Typography variant="h5">You should play...</Typography>
             <img
               src={chosenGame.background_image}

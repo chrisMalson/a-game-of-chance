@@ -29,20 +29,22 @@ const GameInfo = ({ game, id }) => {
           style={{ width: "300px", height: "200px" }}
           src={game.background_image}
         />
-        <Typography variant="body1">{parse(game.description)}</Typography>
         {isOnList.length === 0 ? (
           <AddGameButton game={game} />
         ) : (
           <>
-            {hasMultiplePlatforms && (
+            {hasMultiplePlatforms ? (
               <ChangePlatformButton
                 game={game}
                 currentPlatform={currentPlatform}
               />
+            ) : (
+              <Typography variant="body1">{currentPlatform}</Typography>
             )}
             <RemoveGameButton game={game} />
           </>
         )}
+        <Typography variant="body1">{parse(game.description)}</Typography>
       </Grid>
     </Paper>
   );

@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Grid container justify="space-between" direction="row">
+        <Grid container justify="space-between" direction="row" wrap="nowrap">
           <Grid item>
             <Link href="/">
               <MaterialLink underline="hover" color="initial">
