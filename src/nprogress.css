@@ -46,13 +46,13 @@
   height: 180px;
   box-sizing: border-box;
 
-  border: dashed 20px transparent;
-  border-top-color: #4f43ae;
+  border: dashed 12px transparent;
   border-left-color: #4f43ae;
+  border-right-color: #4f43ae;
   border-radius: 50%;
 
-  -webkit-animation: nprogress-spinner 500ms linear infinite;
-  animation: nprogress-spinner 500ms linear infinite;
+  -webkit-animation: nprogress-spinner 600ms linear infinite;
+  animation: nprogress-spinner 600ms linear infinite;
 }
 
 .nprogress-custom-parent {
