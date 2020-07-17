@@ -1,10 +1,15 @@
 /* globals window */
-import { useEffect, useState } from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/app";
 import "firebase/auth";
 import cookie from "js-cookie";
+import { useEffect, useState } from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+
 import initFirebase from "../utils/auth/initFirebase";
+
+// all of this code was written by the author of react-firebaseui
+
+// TODO: figure out how to change the card background from white to paper background color from theme
 
 // Init the Firebase app.
 initFirebase();

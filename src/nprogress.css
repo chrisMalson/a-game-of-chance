@@ -49,6 +49,8 @@
   border: dashed 12px transparent;
   border-left-color: #4f43ae;
   border-right-color: #4f43ae;
+  border-top-color: #cec9cc;
+  border-bottom-color: #cec9cc;
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 600ms linear infinite;

@@ -1,15 +1,30 @@
-import { useContext, useEffect, useState } from "react";
 import {
   Button,
   ButtonGroup,
-  Typography,
+  FormControl,
   Grid,
   Select,
-  FormControl,
+  Typography,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import { useContext, useEffect, useState } from "react";
 
 import GamesContext from "../context/GamesContext";
+
+const useStyles = makeStyles({
+  optionsBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "nowrap",
+  },
+  select: {
+    width: "100%",
+  },
+  buttons: {
+    width: "auto",
+  },
+});
 
 // filter options include the following:
 // 1. sort games A to Z, and from Z to A
@@ -19,7 +34,10 @@ import GamesContext from "../context/GamesContext";
 // ... and maybe store timestamps? but I'm not sure that'll be particularly useful
 const FilterOptions = () => {
   const [selectedPlatform, setSelectedPlatform] = useState("all-platforms");
+  const { optionsBar, select, buttons } = useStyles();
 
+  // saving the platform to local storage allows it to persist across page renders
+  // this means the game list will generate based on the platform last selected
   useEffect(() => {
     if (localStorage.getItem("selectedPlatform")) {
       setSelectedPlatform(localStorage.getItem("selectedPlatform"));
@@ -28,6 +46,7 @@ const FilterOptions = () => {
 
   const { games, dispatch } = useContext(GamesContext);
 
+  // TODO: figure out why I needed to use a Set here
   const platformList = [...new Set(games.map(({ platform }) => platform))];
 
   const platformListRender = platformList.map((platform) => (
@@ -50,9 +69,9 @@ const FilterOptions = () => {
   };
 
   return (
-    <Grid container justify="space-between">
-      <Grid item xs={8}>
-        <FormControl>
+    <Grid container className={optionsBar}>
+      <Grid item xs={6}>
+        <FormControl className={select}>
           <Select value={selectedPlatform} onChange={handleSortByPlatform}>
             <option key="all-platforms" value="all-platforms">
               All Platforms
@@ -61,13 +80,17 @@ const FilterOptions = () => {
           </Select>
         </FormControl>
       </Grid>
-      <Grid item xs={4}>
-        <ButtonGroup variant="contained" color="primary">
+      <Grid item className={buttons}>
+        <ButtonGroup variant="contained" color="secondary">
           <Button onClick={handleSortAtoZ}>
-            <Typography variant="h6">A {<ArrowRightAltIcon />} Z</Typography>
+            <Typography variant="body1">
+              A {<ArrowRightAltIcon fontSize="small" />} Z
+            </Typography>
           </Button>
           <Button onClick={handleSortZtoA}>
-            <Typography variant="h6">Z {<ArrowRightAltIcon />} A</Typography>
+            <Typography variant="body1">
+              Z {<ArrowRightAltIcon fontSize="small" />} A
+            </Typography>
           </Button>
         </ButtonGroup>
       </Grid>

@@ -1,18 +1,39 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import {
-  FormControl,
-  FormHelperText,
-  Button,
-  FilledInput,
-  Typography,
-  Grid,
-} from "@material-ui/core";
+import { FormControl, Button, FilledInput } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+
+const useStyles = makeStyles((theme) => ({
+  form: {
+    width: "100%",
+  },
+  formControl: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "55px",
+  },
+  input: {
+    maxWidth: "500px",
+    width: "100%",
+    color: theme.palette.primary.contrastText,
+    fontSize: "1.5rem",
+  },
+  button: {
+    width: "50px",
+    height: "100%",
+    borderRadius: "0 4px 4px 0",
+    boxShadow: "none",
+    borderBottom: `1px solid ${theme.palette.secondary.main}`,
+  },
+}));
 
 // TODO: better search filtering; right now any text will be submitted without vetting first
 const SearchForm = () => {
   const router = useRouter();
+  const { form, formControl, input, button } = useStyles();
 
   // for text input value
   const [search, setSearch] = useState("");
@@ -27,30 +48,26 @@ const SearchForm = () => {
   };
 
   return (
-    <Grid container>
-      <form onSubmit={handleSearchSubmit}>
-        <FormControl required>
-          <Grid item>
-            <FormHelperText>
-              <Typography color="textSecondary">
-                Search for a game...
-              </Typography>
-            </FormHelperText>
-            <FilledInput
-              required
-              variant="filled"
-              type="text"
-              onChange={onChange}
-            ></FilledInput>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" type="submit" value="submit">
-              <SearchIcon />
-            </Button>
-          </Grid>
-        </FormControl>
-      </form>
-    </Grid>
+    <form className={form} onSubmit={handleSearchSubmit}>
+      <FormControl className={formControl} required>
+        <FilledInput
+          required
+          variant="filled"
+          type="text"
+          placeholder="Search for a game..."
+          onChange={onChange}
+          className={input}
+        ></FilledInput>
+        <Button
+          className={button}
+          variant="contained"
+          type="submit"
+          value="submit"
+        >
+          <SearchIcon />
+        </Button>
+      </FormControl>
+    </form>
   );
 };
 
