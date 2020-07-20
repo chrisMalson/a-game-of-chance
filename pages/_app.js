@@ -1,14 +1,14 @@
-import React from "react";
-import App from "next/app";
-import Head from "next/head";
 import { Box } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/core/styles";
+import App from "next/app";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+import React from "react";
 
-import theme from "../src/theme";
 import "../src/nprogress.css";
 import GamesReducer from "../utils/pageWrappers/GamesReducer";
+import theme from "../src/theme";
 
 const LoaderBar = dynamic(
   () => {

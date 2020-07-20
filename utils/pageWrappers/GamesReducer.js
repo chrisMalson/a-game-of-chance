@@ -1,9 +1,9 @@
-import { useReducer, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 
-import GamesContext from "../../context/GamesContext";
-import gameListReducer from "../../reducers/gameList";
-import { useUser } from "../auth/useUser";
 import firebase from "../../src/firebase";
+import gameListReducer from "../../reducers/gameList";
+import GamesContext from "../../context/GamesContext";
+import { useUser } from "../auth/useUser";
 
 const GamesReducer = ({ children }) => {
   const [games, dispatch] = useReducer(gameListReducer, []);

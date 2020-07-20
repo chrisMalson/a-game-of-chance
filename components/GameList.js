@@ -19,8 +19,8 @@ const useStyles = makeStyles({
   image: {
     height: "100%",
     minWidth: "100%",
-    objectPosition: "50% 50%",
     objectFit: "cover",
+    objectPosition: "50% 50%",
   },
 });
 
@@ -31,7 +31,7 @@ const GameList = () => {
   const theme = useTheme();
   const { image } = useStyles();
 
-  const columns = useMediaQuery(theme.breakpoints.up("md")) ? 2 : 1;
+  const columns = useMediaQuery(theme.breakpoints.up("sm")) ? 2 : 1;
 
   // sets page to 1 when games changes
   useEffect(() => setPage(1), [games]);

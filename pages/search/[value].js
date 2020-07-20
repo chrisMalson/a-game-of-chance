@@ -1,5 +1,4 @@
 import axios from "axios";
-import Link from "next/link";
 import {
   Box,
   Grid,
@@ -10,14 +9,20 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
+import Link from "next/link";
 
 import Header from "../../components/Header";
 import ReturnToTopButton from "../../components/ReturnToTopButton";
 
+// converts results of API call into clickable elements
+// displays name, database ID, rating (to verify sort order), and first platform in array
+
+// TODO: break searchResults out into its own component
+
 const Search = ({ games, value }) => {
-  // converts results of API call into clickable elements
-  // displays name, database ID, rating (to verify sort order), and first platform in array
-  const columns = useMediaQuery("(min-width:600px)") ? 2 : 1;
+  const theme = useTheme();
+  const columns = useMediaQuery(theme.breakpoints.down("xs")) ? 1 : 2; // single column for mobile
 
   const searchResults = games.map((game) => (
     <GridListTile key={game.id}>

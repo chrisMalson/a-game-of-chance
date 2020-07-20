@@ -1,6 +1,7 @@
-import React from "react";
-import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
+import Document, { Html, Head, Main, NextScript } from "next/document";
+import React from "react";
+
 import theme from "../src/theme";
 
 export default class MyDocument extends Document {
@@ -16,7 +17,7 @@ export default class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+            href="https://fonts.googleapis.com/css2?family=VT323&display=swap" // font used for title of site
           />
         </Head>
         <body>

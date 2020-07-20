@@ -1,8 +1,16 @@
 import { Button, useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
+const useStyles = makeStyles({
+  button: {
+    marginTop: "30px",
+  },
+});
+
+// button that returns users to the top of the page when clicked, for mobile UX
 const ReturnToTopButton = () => {
   const theme = useTheme();
+  const { button } = useStyles();
   const isBelowXsBreakpoint = useMediaQuery(theme.breakpoints.down("xs"));
 
   const scrollToTop = () => {
@@ -15,7 +23,12 @@ const ReturnToTopButton = () => {
   return (
     <>
       {isBelowXsBreakpoint && (
-        <Button fullWidth variant="contained" onClick={scrollToTop}>
+        <Button
+          className={button}
+          fullWidth
+          variant="contained"
+          onClick={scrollToTop}
+        >
           Return To Top
         </Button>
       )}

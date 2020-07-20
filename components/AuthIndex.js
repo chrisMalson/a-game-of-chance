@@ -10,6 +10,12 @@ import Link from "next/link";
 import { useUser } from "../utils/auth/useUser";
 
 const useStyles = makeStyles((theme) => ({
+  authWrapper: {
+    height: "100%",
+    padding: "5px",
+    width: "auto",
+    wordBreak: "break-all",
+  },
   buttonText: {
     color: theme.palette.primary.contrastText,
   },
@@ -19,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
 
 const AuthIndex = () => {
   const { user, logout } = useUser();
-  const { buttonText } = useStyles();
+  const { authWrapper, buttonText } = useStyles();
 
   if (!user) {
     return (
-      <Box>
+      <Box className={authWrapper}>
         <p>Hi there!</p>
         <p>
           You are not signed in.{" "}
-          <Button variant="outlined">
+          <Button variant="contained" color="primary">
             <Link href={"/auth"}>
               <MaterialLink underline="none">
                 <Typography className={buttonText}>Log in</Typography>
@@ -40,14 +46,12 @@ const AuthIndex = () => {
   }
 
   return (
-    <div>
-      <Box>
-        <p>You're signed in as {user.email}</p>
-        <Button variant="outlined" onClick={() => logout()}>
-          <Typography className={buttonText}>Log out</Typography>
-        </Button>
-      </Box>
-    </div>
+    <Box className={authWrapper}>
+      <p>You're signed in as {user.email}</p>
+      <Button variant="contained" color="primary" onClick={() => logout()}>
+        <Typography className={buttonText}>Log out</Typography>
+      </Button>
+    </Box>
   );
 };
 

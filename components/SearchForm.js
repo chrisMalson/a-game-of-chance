@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "nowrap",
     alignItems: "center",
     justifyContent: "center",
     height: "55px",
@@ -57,6 +58,7 @@ const SearchForm = () => {
           placeholder="Search for a game..."
           onChange={onChange}
           className={input}
+          margin="dense"
         ></FilledInput>
         <Button
           className={button}

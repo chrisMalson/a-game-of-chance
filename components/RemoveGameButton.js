@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { Button, Dialog, DialogActions, DialogTitle } from "@material-ui/core";
 import { useRouter } from "next/router";
-import { Button, Dialog, DialogTitle, DialogActions } from "@material-ui/core";
+import { useContext, useState } from "react";
 
 import GamesContext from "../context/GamesContext";
 

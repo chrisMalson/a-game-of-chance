@@ -1,3 +1,6 @@
+// due to issues with nesting multiple contexts, both list management and filtering options are in the same context
+// TODO: figure out how to split into two contexts/reducers
+
 const gameListReducer = (
   state,
   { type, name, id, platform, background_image, storedGames }
@@ -8,7 +11,7 @@ const gameListReducer = (
       return [
         ...state,
         { name, id, platform, background_image, isVisible: true },
-      ]; // id will likely be used for element key purposes
+      ];
     case "REMOVE_GAME":
       return state.filter((game) => game.id !== id);
     case "CHANGE_PLATFORM":
@@ -17,7 +20,7 @@ const gameListReducer = (
           ? { ...game, isVisible: true }
           : { name, id, platform, background_image, isVisible: true }
       );
-    case "BUILD_STORED_LIST":
+    case "BUILD_STORED_LIST": // happens when page is initialized from database
       return storedGames.map((game) => ({ ...game, isVisible: true }));
 
     // FILTERS

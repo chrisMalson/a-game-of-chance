@@ -1,6 +1,9 @@
 import Router from "next/router";
 import NProgress from "nprogress";
 
+// all of this code was provided via Vincent Voyer in the following article:
+// https://dev.to/vvo/show-a-top-progress-bar-on-fetch-and-router-events-in-next-js-4df3
+
 let timer;
 let state;
 let activeRequests = 0;

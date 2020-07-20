@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import Header from "../../components/Header";
 import GameInfo from "../../components/GameInfo";
+import Header from "../../components/Header";
 import ReturnToTopButton from "../../components/ReturnToTopButton";
 
 const GamePage = ({ game, id }) => {

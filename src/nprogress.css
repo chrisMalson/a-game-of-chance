@@ -3,6 +3,7 @@
   pointer-events: none;
 }
 
+/* bar does not display currently; code left here just in case */
 #nprogress .bar {
   background: #4f43ae;
   display: none;
