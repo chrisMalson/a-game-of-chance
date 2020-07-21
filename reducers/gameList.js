@@ -43,8 +43,8 @@ const gameListReducer = (
             return { ...game, isVisible: false };
         }
       });
-    case "SET_ALL_TO_VISIBLE":
-      return state.map((game) => ({ ...game, isVisible: true }));
+    // case "SET_ALL_TO_VISIBLE":
+    //   return state.map((game) => ({ ...game, isVisible: true }));
     default:
       return state;
   }

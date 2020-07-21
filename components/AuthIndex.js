@@ -11,10 +11,12 @@ import { useUser } from "../utils/auth/useUser";
 
 const useStyles = makeStyles((theme) => ({
   authWrapper: {
+    backgroundColor: theme.palette.common.white,
     height: "100%",
-    padding: "5px",
+    padding: "20px",
     width: "auto",
     wordBreak: "break-all",
+    textAlign: "center",
   },
   buttonText: {
     color: theme.palette.primary.contrastText,
@@ -30,26 +32,31 @@ const AuthIndex = () => {
   if (!user) {
     return (
       <Box className={authWrapper}>
-        <p>Hi there!</p>
-        <p>
+        <Typography variant="body2" gutterBottom>
+          Hi there!
+        </Typography>
+        <Typography variant="body1" gutterBottom>
           You are not signed in.{" "}
-          <Button variant="contained" color="primary">
+          <Button variant="outlined" color="primary">
             <Link href={"/auth"}>
-              <MaterialLink underline="none">
-                <Typography className={buttonText}>Log in</Typography>
-              </MaterialLink>
+              <MaterialLink underline="none">Log in</MaterialLink>
             </Link>
           </Button>
-        </p>
+        </Typography>
       </Box>
     );
   }
 
   return (
     <Box className={authWrapper}>
-      <p>You're signed in as {user.email}</p>
-      <Button variant="contained" color="primary" onClick={() => logout()}>
-        <Typography className={buttonText}>Log out</Typography>
+      <Typography variant="body2" gutterBottom>
+        You're signed in as
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        {user.email}
+      </Typography>
+      <Button variant="outlined" onClick={() => logout()}>
+        Log out
       </Button>
     </Box>
   );

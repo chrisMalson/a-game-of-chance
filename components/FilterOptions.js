@@ -3,7 +3,7 @@ import {
   ButtonGroup,
   FormControl,
   Grid,
-  Select,
+  NativeSelect,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,18 +33,24 @@ const useStyles = makeStyles({
 // TODO: more filter options, refactor alphabetical into singular function, allow multiple selected platforms
 // ... and maybe store timestamps? but I'm not sure that'll be particularly useful
 const FilterOptions = () => {
+  const { games, dispatch } = useContext(GamesContext);
   const [selectedPlatform, setSelectedPlatform] = useState("all-platforms");
   const { optionsBar, select, buttons } = useStyles();
 
   // saving the platform to local storage allows it to persist across page renders
   // this means the game list will generate based on the platform last selected
   useEffect(() => {
-    if (localStorage.getItem("selectedPlatform")) {
-      setSelectedPlatform(localStorage.getItem("selectedPlatform"));
+    if (localStorage.getItem("selectedPlatform") && games.length > 0) {
+      const updatedPlatform = localStorage.getItem("selectedPlatform");
+      setSelectedPlatform(updatedPlatform);
     }
   }, []);
 
-  const { games, dispatch } = useContext(GamesContext);
+  useEffect(() => {
+    if (games.length > 0) {
+      dispatch({ type: "SORT_BY_PLATFORM", platform: selectedPlatform });
+    }
+  }, [selectedPlatform]);
 
   // TODO: figure out why I needed to use a Set here
   const platformList = [...new Set(games.map(({ platform }) => platform))];
@@ -64,20 +70,21 @@ const FilterOptions = () => {
 
     localStorage.setItem("selectedPlatform", newPlatform);
     setSelectedPlatform(newPlatform);
-    console.log(selectedPlatform);
-    dispatch({ type: "SORT_BY_PLATFORM", platform: newPlatform });
   };
 
   return (
     <Grid container className={optionsBar}>
       <Grid item xs={6}>
         <FormControl className={select}>
-          <Select value={selectedPlatform} onChange={handleSortByPlatform}>
+          <NativeSelect
+            value={selectedPlatform}
+            onChange={handleSortByPlatform}
+          >
             <option key="all-platforms" value="all-platforms">
               All Platforms
             </option>
             {platformListRender}
-          </Select>
+          </NativeSelect>
         </FormControl>
       </Grid>
       <Grid item className={buttons}>

@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     fontSize: "2.5rem",
     alignSelf: "center",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   titleWrapper: {
     order: 1,

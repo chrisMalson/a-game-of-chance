@@ -1,4 +1,15 @@
-import { Button, Fab, Grid, Modal, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  IconButton,
+  Modal,
+  Paper,
+  Snackbar,
+  Typography,
+} from "@material-ui/core";
+import CasinoIcon from "@material-ui/icons/Casino";
+import CloseIcon from "@material-ui/icons/Close";
+import { Alert } from "@material-ui/lab";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useContext } from "react";
 
@@ -7,8 +18,20 @@ import GamesContext from "../context/GamesContext";
 // TODO: convert Modal to Dialog as per Material-UI recommendation
 
 const useStyles = makeStyles((theme) => ({
+  alert: {
+    fontWeight: 600,
+  },
+  button: {
+    padding: "1.5rem",
+    color: theme.palette.common.white,
+  },
+  cancel: {
+    alignSelf: "flex-end",
+  },
   image: {
+    border: `2px solid ${theme.palette.primary.main}`,
     height: "50vw",
+    marginBottom: "20px",
     maxHeight: "300px",
     objectFit: "cover",
     objectPosition: "50% 50%",
@@ -21,8 +44,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
+    alignItems: "center",
+    backgroundColor: theme.palette.background.default,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
     padding: theme.spacing(1),
-    textAlign: "center",
+    outline: "none",
   },
 }));
 
@@ -32,12 +60,18 @@ const useStyles = makeStyles((theme) => ({
 // TODO: add X button to top right of modal
 const PickRandomGameButton = () => {
   const { games } = useContext(GamesContext);
-  const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [chosenGame, setChosenGame] = useState("");
-  const { modal, paper, image } = useStyles();
+  const { alert, button, cancel, modal, paper, image } = useStyles();
 
   const handleChooseGame = () => {
     const filteredGames = games.filter((game) => game.isVisible);
+    if (filteredGames.length === 0) {
+      setOpenSnackbar(true);
+      return;
+    }
+
     const rawChosenGame =
       filteredGames[Math.floor(Math.random() * filteredGames.length)];
 
@@ -49,37 +83,75 @@ const PickRandomGameButton = () => {
 
     setChosenGame({ ...rawChosenGame, name: truncatedName });
 
-    setOpen(true);
+    setOpenModal(true);
+  };
+
+  // shorthand due to event parameter being unused
+  const handleCloseSnackbar = (...[, reason]) => {
+    if (reason !== "clickaway") {
+      setOpenSnackbar(false);
+    }
   };
 
   return (
     <Grid container spacing={1} justify="center">
       <Grid item>
-        <Fab
+        <Button
+          className={button}
+          fullWidth
+          disableElevation
           size="large"
-          variant="extended"
+          variant="contained"
           color="primary"
           onClick={handleChooseGame}
+          startIcon={<CasinoIcon size="large" />}
         >
           <Typography variant="h6">Choose a game to play!</Typography>
-        </Fab>
+        </Button>
       </Grid>
-      <Modal className={modal} open={open} onClose={() => setOpen(false)}>
+      <Modal
+        className={modal}
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      >
         {
-          <Paper className={paper} onClick={() => setOpen(false)}>
-            <Typography variant="h5">You should play...</Typography>
+          <Paper className={paper}>
+            <IconButton className={cancel} onClick={() => setOpenModal(false)}>
+              <CloseIcon className={cancel} size="large" />
+            </IconButton>
+            <Typography variant="h5" gutterBottom>
+              You should play...
+            </Typography>
             <img src={chosenGame.background_image} className={image} />
             <Typography variant="h3" gutterBottom>
               {chosenGame.name}
             </Typography>
-            <Button fullWidth variant="contained" color="primary">
-              <Typography color="textPrimary" variant="h2">
-                OK!
-              </Typography>
+            <Button
+              className={button}
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => setOpenModal(false)}
+            >
+              <Typography variant="h2">OK!</Typography>
             </Button>
           </Paper>
         }
       </Modal>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          className={alert}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity="error"
+        >
+          No games to pick from yet!
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

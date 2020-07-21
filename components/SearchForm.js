@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { FormControl, Button, FilledInput } from "@material-ui/core";
+import {
+  Button,
+  FilledInput,
+  FormControl,
+  InputLabel,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
-  },
-  formControl: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
@@ -16,10 +19,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     height: "55px",
   },
-  input: {
-    maxWidth: "500px",
-    width: "100%",
+  formControl: {
+    width: "80%",
+  },
+  inputLabel: {
     color: theme.palette.primary.contrastText,
+    paddingLeft: "1rem",
+  },
+  input: {
+    width: "100%",
+    color: theme.palette.common.white,
     fontSize: "1.5rem",
   },
   button: {
@@ -34,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 // TODO: better search filtering; right now any text will be submitted without vetting first
 const SearchForm = () => {
   const router = useRouter();
-  const { form, formControl, input, button } = useStyles();
+  const { button, form, formControl, input, inputLabel } = useStyles();
 
   // for text input value
   const [search, setSearch] = useState("");
@@ -50,25 +59,32 @@ const SearchForm = () => {
 
   return (
     <form className={form} onSubmit={handleSearchSubmit}>
-      <FormControl className={formControl} required>
+      <FormControl className={formControl}>
+        <InputLabel
+          color="secondary"
+          className={inputLabel}
+          htmlFor="search-input"
+        >
+          Search for a game...
+        </InputLabel>
         <FilledInput
           required
+          id="search-input"
           variant="filled"
           type="text"
-          placeholder="Search for a game..."
           onChange={onChange}
           className={input}
           margin="dense"
         ></FilledInput>
-        <Button
-          className={button}
-          variant="contained"
-          type="submit"
-          value="submit"
-        >
-          <SearchIcon />
-        </Button>
       </FormControl>
+      <Button
+        className={button}
+        variant="contained"
+        type="submit"
+        value="submit"
+      >
+        <SearchIcon />
+      </Button>
     </form>
   );
 };
