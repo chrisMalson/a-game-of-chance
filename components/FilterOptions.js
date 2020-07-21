@@ -13,16 +13,20 @@ import { useContext, useEffect, useState } from "react";
 import GamesContext from "../context/GamesContext";
 
 const useStyles = makeStyles({
+  arrowIcon: {
+    marginBottom: "-0.5ex",
+  },
+  buttons: {
+    width: "auto",
+  },
+  formControl: {
+    width: "100%",
+  },
   optionsBar: {
     display: "flex",
     justifyContent: "space-between",
     flexWrap: "nowrap",
-  },
-  select: {
-    width: "100%",
-  },
-  buttons: {
-    width: "auto",
+    marginBottom: "10px",
   },
 });
 
@@ -35,7 +39,7 @@ const useStyles = makeStyles({
 const FilterOptions = () => {
   const { games, dispatch } = useContext(GamesContext);
   const [selectedPlatform, setSelectedPlatform] = useState("all-platforms");
-  const { optionsBar, select, buttons } = useStyles();
+  const { arrowIcon, buttons, formControl, optionsBar } = useStyles();
 
   // saving the platform to local storage allows it to persist across page renders
   // this means the game list will generate based on the platform last selected
@@ -75,7 +79,7 @@ const FilterOptions = () => {
   return (
     <Grid container className={optionsBar}>
       <Grid item xs={6}>
-        <FormControl className={select}>
+        <FormControl className={formControl}>
           <NativeSelect
             value={selectedPlatform}
             onChange={handleSortByPlatform}
@@ -91,12 +95,12 @@ const FilterOptions = () => {
         <ButtonGroup variant="contained" color="secondary">
           <Button onClick={handleSortAtoZ}>
             <Typography variant="body1">
-              A {<ArrowRightAltIcon fontSize="small" />} Z
+              A {<ArrowRightAltIcon className={arrowIcon} fontSize="small" />} Z
             </Typography>
           </Button>
           <Button onClick={handleSortZtoA}>
             <Typography variant="body1">
-              Z {<ArrowRightAltIcon fontSize="small" />} A
+              Z {<ArrowRightAltIcon className={arrowIcon} fontSize="small" />} A
             </Typography>
           </Button>
         </ButtonGroup>

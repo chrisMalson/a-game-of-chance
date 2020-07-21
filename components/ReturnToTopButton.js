@@ -1,11 +1,13 @@
 import { Button, useMediaQuery } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   button: {
-    marginTop: "30px",
+    color: theme.palette.common.black,
+    fontWeight: 1000,
+    borderRadius: 0,
   },
-});
+}));
 
 // button that returns users to the top of the page when clicked, for mobile UX
 const ReturnToTopButton = () => {
@@ -27,6 +29,7 @@ const ReturnToTopButton = () => {
           className={button}
           fullWidth
           variant="contained"
+          color="secondary"
           onClick={scrollToTop}
         >
           Return To Top

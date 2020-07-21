@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, useMediaQuery } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useContext } from "react";
 
 import AddGameButton from "./AddGameButton";
@@ -30,6 +30,11 @@ const GameInfo = ({ game, id }) => {
     isOnList.length !== 0 ? isOnList[0].platform : undefined;
   const hasMultiplePlatforms = game.platforms.length > 1;
 
+  const gameImage =
+    game.background_image === null
+      ? `https://via.placeholder.com/480/908a99/b5b6e4?text=video+games`
+      : game.background_image;
+
   return (
     <Box>
       <Grid container direction={gridDirection}>
@@ -45,10 +50,7 @@ const GameInfo = ({ game, id }) => {
             <Typography variant="h3">{game.name}</Typography>
           </Grid>
           <Grid item>
-            <img
-              style={{ width: "300px", height: "200px" }}
-              src={game.background_image}
-            />
+            <img src={gameImage} />
           </Grid>
         </Grid>
         <Grid
@@ -61,7 +63,7 @@ const GameInfo = ({ game, id }) => {
         >
           <Grid item>
             {isOnList.length === 0 ? (
-              <AddGameButton game={game} />
+              <AddGameButton game={{ ...game, background_image: gameImage }} />
             ) : (
               <Grid container item direction="column" alignItems="center">
                 <Grid item>

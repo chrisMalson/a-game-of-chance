@@ -9,11 +9,31 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Link from "next/link";
 
 import Header from "../../components/Header";
-import ReturnToTopButton from "../../components/ReturnToTopButton";
+
+const useStyles = makeStyles((theme) => ({
+  gameTile: {
+    "&:hover": {
+      transform: "scale(0.98)",
+    },
+  },
+  image: {
+    border: `2px solid ${theme.palette.primary.main}`,
+    height: "100%",
+    minWidth: "100%",
+    objectPosition: "50% 50%",
+    objectFit: "cover",
+  },
+  paper: {
+    padding: "20px",
+  },
+  resultsText: {
+    margin: "20px",
+  },
+}));
 
 // converts results of API call into clickable elements
 // displays name, database ID, rating (to verify sort order), and first platform in array
@@ -22,42 +42,41 @@ import ReturnToTopButton from "../../components/ReturnToTopButton";
 
 const Search = ({ games, value }) => {
   const theme = useTheme();
+  const { gameTile, image, paper, resultsText } = useStyles();
   const columns = useMediaQuery(theme.breakpoints.down("xs")) ? 1 : 2; // single column for mobile
 
-  const searchResults = games.map((game) => (
-    <GridListTile key={game.id}>
-      <Link href="/game/[id]" as={`/game/${game.id}`}>
-        <a>
-          <img
-            style={{
-              height: "100%",
-              minWidth: "100%",
-              objectPosition: "50% 50%",
-              objectFit: "cover",
-            }}
-            src={game.background_image}
-          />
-          <GridListTileBar title={game.name} subtitle={game.platform} />
-        </a>
-      </Link>
-    </GridListTile>
-  ));
+  const searchResults = games.map((game) => {
+    const gameImage =
+      game.background_image === null
+        ? `https://via.placeholder.com/480/908a99/b5b6e4?text=video+games`
+        : game.background_image;
+
+    return (
+      <GridListTile className={gameTile} key={game.id}>
+        <Link href="/game/[id]" as={`/game/${game.id}`}>
+          <a>
+            <img className={image} src={gameImage} />
+            <GridListTileBar title={game.name} subtitle={game.platform} />
+          </a>
+        </Link>
+      </GridListTile>
+    );
+  });
 
   return (
     <>
       <Header />
       <Box />
-      <Typography variant="h4" align="center" gutterBottom>
-        Search results for "{value}"
+      <Typography className={resultsText} variant="h5" align="center">
+        Search results for "{value}":
       </Typography>
       <Grid container direction="row" justify="center">
         <Grid item xs={10} sm={8} md={6}>
-          <Paper variant="outlined">
+          <Paper className={paper} variant="outlined">
             <GridList cols={columns}>{searchResults}</GridList>
           </Paper>
         </Grid>
       </Grid>
-      <ReturnToTopButton />
     </>
   );
 };

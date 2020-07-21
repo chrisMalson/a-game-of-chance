@@ -7,6 +7,7 @@ import Head from "next/head";
 import React from "react";
 
 import "../src/nprogress.css";
+import Footer from "../components/Footer";
 import GamesReducer from "../utils/pageWrappers/GamesReducer";
 import theme from "../src/theme";
 
@@ -16,6 +17,8 @@ const LoaderBar = dynamic(
   },
   { ssr: false }
 );
+
+// TODO: custom 404 page
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -44,6 +47,7 @@ export default class MyApp extends App {
           <GamesReducer>
             <LoaderBar />
             <Component {...pageProps} />
+            <Footer />
           </GamesReducer>
         </ThemeProvider>
       </Box>
