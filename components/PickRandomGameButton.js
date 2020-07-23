@@ -1,6 +1,6 @@
 import {
   Button,
-  Grid,
+  Container,
   IconButton,
   Modal,
   Paper,
@@ -25,7 +25,14 @@ const useStyles = makeStyles((theme) => ({
   button: {
     padding: "1.5rem",
     margin: "2.5rem 0",
-    color: theme.palette.common.white,
+  },
+  buttonOK: {
+    margin: "1rem 0",
+    padding: "0 2rem",
+  },
+  buttonWrapper: {
+    display: "flex",
+    justifyContent: "center",
   },
   cancel: {
     alignSelf: "flex-end",
@@ -34,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     border: `2px solid ${theme.palette.primary.main}`,
     height: "50vw",
     marginBottom: "20px",
-    maxHeight: "300px",
+    maxHeight: "250px",
     objectFit: "cover",
     objectPosition: "50% 50%",
     width: "100%",
@@ -42,8 +49,9 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     margin: "5%",
     [theme.breakpoints.up("sm")]: {
-      margin: "5% 20%",
+      margin: "5% 30%",
     },
+    maxHeight: "90vh",
   },
   paper: {
     alignItems: "center",
@@ -65,10 +73,21 @@ const PickRandomGameButton = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [chosenGame, setChosenGame] = useState("");
-  const { alert, button, cancel, modal, paper, image } = useStyles();
+  const {
+    alert,
+    button,
+    buttonOK,
+    buttonWrapper,
+    cancel,
+    modal,
+    paper,
+    image,
+  } = useStyles();
   const theme = useTheme();
 
-  const buttonTextSize = useMediaQuery(theme.breakpoints.up("sm")) ? "h6" : "";
+  const buttonTextSize = useMediaQuery(theme.breakpoints.up("sm"))
+    ? "h6"
+    : "body1";
 
   const handleChooseGame = () => {
     const filteredGames = games.filter((game) => game.isVisible);
@@ -82,8 +101,8 @@ const PickRandomGameButton = () => {
 
     // if the game name exceeds 40 characters, the name will be shortened
     const truncatedName =
-      rawChosenGame.name.length > 40
-        ? `${rawChosenGame.name.split("").slice(0, 39).join("")}...`
+      rawChosenGame.name.length > 60
+        ? `${rawChosenGame.name.split("").slice(0, 59).join("")}...`
         : rawChosenGame.name;
 
     setChosenGame({ ...rawChosenGame, name: truncatedName });
@@ -99,11 +118,10 @@ const PickRandomGameButton = () => {
   };
 
   return (
-    <Grid container spacing={1} justify="center">
-      <Grid item>
+    <>
+      <Container className={buttonWrapper}>
         <Button
           className={button}
-          fullWidth
           disableElevation
           size="large"
           variant="contained"
@@ -115,7 +133,7 @@ const PickRandomGameButton = () => {
             Choose a game to play!
           </Typography>
         </Button>
-      </Grid>
+      </Container>
       <Modal
         className={modal}
         open={openModal}
@@ -126,16 +144,16 @@ const PickRandomGameButton = () => {
             <IconButton className={cancel} onClick={() => setOpenModal(false)}>
               <CloseIcon className={cancel} size="large" />
             </IconButton>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="body2" gutterBottom>
               You should play...
             </Typography>
             <img src={chosenGame.background_image} className={image} />
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h5" align="center" gutterBottom>
               {chosenGame.name}
             </Typography>
             <Button
-              className={button}
-              fullWidth
+              className={buttonOK}
+              size="large"
               variant="contained"
               color="primary"
               onClick={() => setOpenModal(false)}
@@ -159,7 +177,7 @@ const PickRandomGameButton = () => {
           No games to pick from yet!
         </Alert>
       </Snackbar>
-    </Grid>
+    </>
   );
 };
 

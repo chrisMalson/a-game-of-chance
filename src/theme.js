@@ -9,7 +9,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#4f43ae",
-      contrastText: "#cec9cc",
+      contrastText: "#f9faf8",
     },
     secondary: {
       main: "#908a99",
@@ -32,6 +32,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: "monospace",
     h2: {
+      fontSize: "3rem",
       fontFamily: "VT323, monospace",
     },
   },

@@ -17,6 +17,8 @@ const useStyles = makeStyles({
 // renders a button that adds game to list with selectable platform
 // lists only available platforms from data fetched via API call
 const AddGameButton = ({ game }) => {
+  console.log(game);
+
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);
   const { button, select } = useStyles();
@@ -25,7 +27,12 @@ const AddGameButton = ({ game }) => {
   const { name, id, background_image } = game;
 
   // for a controlled select dropdown where the only options are the platforms the game is available on
-  const [platform, setPlatform] = useState(game.platforms[0].platform.name);
+  const initialPlatform =
+    game.platforms.length > 0
+      ? game.platforms[0].platform.name
+      : "Unknown Platform";
+
+  const [platform, setPlatform] = useState(initialPlatform);
   const availablePlatforms = game.platforms.map((i) => (
     <option key={i.platform.name} value={i.platform.name}>
       {i.platform.name}
@@ -42,8 +49,8 @@ const AddGameButton = ({ game }) => {
   // if only one available platform, only text will show rather than select element
 
   return (
-    <Grid container spacing={1} justify="center">
-      <Grid item xs={12} sm={9}>
+    <Grid container direction="column" spacing={1} alignItems="center">
+      <Grid item>
         {availablePlatforms.length > 1 ? (
           <NativeSelect
             className={select}
@@ -56,7 +63,7 @@ const AddGameButton = ({ game }) => {
           <Typography className={select}>{platform}</Typography>
         )}
       </Grid>
-      <Grid item xs={6} sm={3}>
+      <Grid item>
         <Button
           className={button}
           variant="contained"
