@@ -25,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
     order: 2,
     alignSelf: "center",
 
-    ["@media(min-width:857px)"]: {
+    ["@media(min-width:793px)"]: {
       order: 3,
     },
   },
   headerBar: {
     padding: theme.spacing(0.5),
+    paddingBottom: theme.spacing(1.5),
   },
   formWrapper: {
     display: "flex",
@@ -38,16 +39,20 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     order: 3,
 
-    ["@media(min-width:857px)"]: {
+    ["@media(min-width:793px)"]: {
       order: 2,
     },
   },
   title: {
     color: theme.palette.common.white,
-    fontSize: "2.5rem",
+    fontSize: "1.5rem",
+    paddingTop: "0.5ex",
     alignSelf: "center",
     "&:hover": {
       cursor: "pointer",
+    },
+    ["@media(min-width:400px)"]: {
+      fontSize: "2rem",
     },
   },
   titleWrapper: {

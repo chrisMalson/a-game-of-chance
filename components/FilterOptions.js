@@ -6,7 +6,7 @@ import {
   NativeSelect,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import { useContext, useEffect, useState } from "react";
 
@@ -16,18 +16,15 @@ const useStyles = makeStyles({
   arrowIcon: {
     marginBottom: "-0.5ex",
   },
-  buttons: {
-    width: "auto",
-  },
   formControl: {
     width: "100%",
   },
-  optionsBar: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "nowrap",
-    marginBottom: "10px",
-  },
+  // optionsBar: {
+  //   display: "flex",
+  //   justifyContent: "space-between",
+  //   flexWrap: "nowrap",
+  //   marginBottom: "10px",
+  // },
 });
 
 // filter options include the following:
@@ -39,7 +36,10 @@ const useStyles = makeStyles({
 const FilterOptions = () => {
   const { games, dispatch } = useContext(GamesContext);
   const [selectedPlatform, setSelectedPlatform] = useState("all-platforms");
-  const { arrowIcon, buttons, formControl, optionsBar } = useStyles();
+  const { arrowIcon, formControl, optionsBar } = useStyles();
+
+  const theme = useTheme();
+  const gridDirection = theme.breakpoints.up("sm") ? "row" : "column";
 
   // saving the platform to local storage allows it to persist across page renders
   // this means the game list will generate based on the platform last selected
@@ -77,8 +77,13 @@ const FilterOptions = () => {
   };
 
   return (
-    <Grid container className={optionsBar}>
-      <Grid item xs={6}>
+    <Grid
+      container
+      direction={gridDirection}
+      spacing={1}
+      className={optionsBar}
+    >
+      <Grid item xs={12} sm={7} md={8} lg={9}>
         <FormControl className={formControl}>
           <NativeSelect
             value={selectedPlatform}
@@ -91,8 +96,8 @@ const FilterOptions = () => {
           </NativeSelect>
         </FormControl>
       </Grid>
-      <Grid item className={buttons}>
-        <ButtonGroup variant="contained" color="secondary">
+      <Grid item xs={12} sm={5} md={4} lg={3} align="right">
+        <ButtonGroup fullWidth variant="contained" color="secondary">
           <Button onClick={handleSortAtoZ}>
             <Typography variant="body1">
               A {<ArrowRightAltIcon className={arrowIcon} fontSize="small" />} Z

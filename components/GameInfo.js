@@ -1,4 +1,10 @@
-import { Box, Grid, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useContext } from "react";
 
@@ -6,6 +12,29 @@ import AddGameButton from "./AddGameButton";
 import ChangePlatformButton from "./ChangePlatformButton";
 import GamesContext from "../context/GamesContext";
 import RemoveGameButton from "./RemoveGameButton";
+
+const useStyles = makeStyles((theme) => ({
+  description: {
+    padding: "1em",
+  },
+  hr: {
+    marginTop: "1em",
+  },
+  image: {
+    boxShadow: `1px 1px 1px ${theme.palette.secondary.main}`,
+    height: "auto",
+    // margin: "1.5rem 0",
+    maxWidth: "500px",
+    width: "100%",
+  },
+  paper: {
+    margin: "20px",
+    padding: "20px",
+  },
+  vr: {
+    // margin: "0 1em",
+  },
+}));
 
 // currently displays name, description, and a related image
 
@@ -16,9 +45,10 @@ import RemoveGameButton from "./RemoveGameButton";
 const GameInfo = ({ game, id }) => {
   const { games } = useContext(GamesContext);
   const theme = useTheme();
+  const { description, hr, image, paper, vr } = useStyles();
 
   // will display vertically in mobile and horizontally on desktop
-  const gridDirection = useMediaQuery(theme.breakpoints.up("sm"))
+  const gridDirection = useMediaQuery(theme.breakpoints.up("md"))
     ? "row"
     : "column";
 
@@ -36,30 +66,40 @@ const GameInfo = ({ game, id }) => {
       : game.background_image;
 
   return (
-    <Box>
-      <Grid container direction={gridDirection}>
+    <Paper className={paper} variant="outlined">
+      <Grid container direction={gridDirection} spacing={2}>
         <Grid
           container
           item
           xs={12}
-          sm={6}
+          md={6}
           direction="column"
           alignItems="center"
+          spacing={2}
         >
           <Grid item>
-            <Typography variant="h3">{game.name}</Typography>
+            <Typography align="center" variant="h5">
+              {game.name}
+            </Typography>
+            <Divider className={hr} />
           </Grid>
           <Grid item>
-            <img src={gameImage} />
+            <img className={image} src={gameImage} />
           </Grid>
         </Grid>
+        {gridDirection === "row" && (
+          <Grid item md>
+            <Divider className={vr} orientation="vertical" />
+          </Grid>
+        )}
         <Grid
           container
           item
           xs={12}
-          sm={6}
+          md={6}
           direction="column"
           alignItems="center"
+          spacing={2}
         >
           <Grid item>
             {isOnList.length === 0 ? (
@@ -73,7 +113,9 @@ const GameInfo = ({ game, id }) => {
                       currentPlatform={currentPlatform}
                     />
                   ) : (
-                    <Typography variant="body1">{currentPlatform}</Typography>
+                    <Typography variant="body1" gutterBottom>
+                      {currentPlatform}
+                    </Typography>
                   )}
                 </Grid>
                 <Grid item>
@@ -83,11 +125,14 @@ const GameInfo = ({ game, id }) => {
             )}
           </Grid>
           <Grid item>
-            <Typography variant="body1">{game.description_raw}</Typography>
+            <Divider className={hr} />
+            <Typography className={description} variant="body1">
+              {game.description_raw}
+            </Typography>
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Paper>
   );
 };
 

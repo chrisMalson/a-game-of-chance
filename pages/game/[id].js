@@ -1,14 +1,24 @@
 import axios from "axios";
+import { Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 import GameInfo from "../../components/GameInfo";
 import Header from "../../components/Header";
 
+const useStyles = makeStyles({
+  pageWrapper: {
+    minHeight: "100vh",
+  },
+});
+
 const GamePage = ({ game, id }) => {
+  const { pageWrapper } = useStyles();
+
   return (
-    <>
+    <Box className={pageWrapper}>
       <Header />
       <GameInfo game={game} id={id} />
-    </>
+    </Box>
   );
 };
 

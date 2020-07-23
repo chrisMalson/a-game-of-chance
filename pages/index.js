@@ -1,4 +1,5 @@
 import { Box, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 import AuthIndex from "../components/AuthIndex";
 import GameList from "../components/GameList";
@@ -7,26 +8,24 @@ import HeaderSimple from "../components/HeaderSimple";
 import PickRandomGameButton from "../components/PickRandomGameButton";
 import { useUser } from "../utils/auth/useUser";
 
+const useStyles = makeStyles({
+  pageWrapper: {
+    minHeight: "100vh",
+  },
+});
+
 // if user is not signed in, only a simplified header and login message/button will show
 const Index = () => {
   const { user } = useUser();
+  const { pageWrapper } = useStyles();
 
   return (
-    <Box>
+    <Box className={pageWrapper}>
       {user ? (
         <>
           <Header />
-          <Grid container direction="column" spacing={5}>
-            <Grid item>
-              <Box />
-            </Grid>
-            <Grid item>
-              <PickRandomGameButton />
-            </Grid>
-            <Grid item>
-              <GameList />
-            </Grid>
-          </Grid>
+          <PickRandomGameButton />
+          <GameList />
         </>
       ) : (
         <>

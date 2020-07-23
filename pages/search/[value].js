@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     objectPosition: "50% 50%",
     objectFit: "cover",
   },
+  pageWrapper: {
+    minHeight: "100vh",
+  },
   paper: {
     padding: "20px",
   },
@@ -42,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = ({ games, value }) => {
   const theme = useTheme();
-  const { gameTile, image, paper, resultsText } = useStyles();
+  const { gameTile, image, pageWrapper, paper, resultsText } = useStyles();
   const columns = useMediaQuery(theme.breakpoints.down("xs")) ? 1 : 2; // single column for mobile
 
   const searchResults = games.map((game) => {
@@ -64,20 +67,26 @@ const Search = ({ games, value }) => {
   });
 
   return (
-    <>
+    <Box className={pageWrapper}>
       <Header />
       <Box />
       <Typography className={resultsText} variant="h5" align="center">
         Search results for "{value}":
       </Typography>
-      <Grid container direction="row" justify="center">
-        <Grid item xs={10} sm={8} md={6}>
-          <Paper className={paper} variant="outlined">
-            <GridList cols={columns}>{searchResults}</GridList>
-          </Paper>
+      {searchResults.length > 0 ? (
+        <Grid container direction="row" justify="center">
+          <Grid item xs={10} sm={8} md={6}>
+            <Paper className={paper} variant="outlined">
+              <GridList cols={columns}>{searchResults}</GridList>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
-    </>
+      ) : (
+        <Typography variant="h5" align="center">
+          No results found.
+        </Typography>
+      )}
+    </Box>
   );
 };
 

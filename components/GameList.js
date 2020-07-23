@@ -73,7 +73,7 @@ const GameList = () => {
 
   return (
     <>
-      <Typography align="center" variant="h4" gutterBottom>
+      <Typography align="center" variant="h5" gutterBottom>
         {games.length} game{s} backlogged:
       </Typography>
       <Grid container direction="row" justify="center">

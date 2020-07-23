@@ -6,11 +6,12 @@ import {
   Paper,
   Snackbar,
   Typography,
+  useMediaQuery,
 } from "@material-ui/core";
 import CasinoIcon from "@material-ui/icons/Casino";
 import CloseIcon from "@material-ui/icons/Close";
 import { Alert } from "@material-ui/lab";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useState, useContext } from "react";
 
 import GamesContext from "../context/GamesContext";
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     padding: "1.5rem",
+    margin: "2.5rem 0",
     color: theme.palette.common.white,
   },
   cancel: {
@@ -64,6 +66,9 @@ const PickRandomGameButton = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [chosenGame, setChosenGame] = useState("");
   const { alert, button, cancel, modal, paper, image } = useStyles();
+  const theme = useTheme();
+
+  const buttonTextSize = useMediaQuery(theme.breakpoints.up("sm")) ? "h6" : "";
 
   const handleChooseGame = () => {
     const filteredGames = games.filter((game) => game.isVisible);
@@ -106,7 +111,9 @@ const PickRandomGameButton = () => {
           onClick={handleChooseGame}
           startIcon={<CasinoIcon size="large" />}
         >
-          <Typography variant="h6">Choose a game to play!</Typography>
+          <Typography variant={buttonTextSize}>
+            Choose a game to play!
+          </Typography>
         </Button>
       </Grid>
       <Modal

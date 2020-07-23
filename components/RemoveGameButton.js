@@ -19,7 +19,9 @@ const RemoveGameButton = ({ game }) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Remove Game</Button>
+      <Button variant="outlined" onClick={() => setOpen(true)}>
+        Remove Game
+      </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Are you sure?</DialogTitle>
         <DialogActions>
