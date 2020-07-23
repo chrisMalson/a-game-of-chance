@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1em",
   },
   image: {
-    boxShadow: `1px 1px 1px ${theme.palette.secondary.main}`,
+    border: `1px solid ${theme.palette.secondary.main}`,
     height: "auto",
     // margin: "1.5rem 0",
     maxWidth: "500px",
@@ -65,6 +65,9 @@ const GameInfo = ({ game, id }) => {
       ? `https://via.placeholder.com/480/908a99/b5b6e4?text=video+games`
       : game.background_image;
 
+  const dummyDescription =
+    "This is a video game that, when played, becomes a video game that you are playing. By playing this video game, you will find that you are currently playing a video game. For people who want to play a video game, this is a video game that people who want to play a video game can play.";
+
   return (
     <Paper className={paper} variant="outlined">
       <Grid container direction={gridDirection} spacing={2}>
@@ -105,7 +108,13 @@ const GameInfo = ({ game, id }) => {
             {isOnList.length === 0 ? (
               <AddGameButton game={{ ...game, background_image: gameImage }} />
             ) : (
-              <Grid container item direction="column" alignItems="center">
+              <Grid
+                container
+                spacing={1}
+                item
+                direction="column"
+                alignItems="center"
+              >
                 <Grid item>
                   {hasMultiplePlatforms ? (
                     <ChangePlatformButton
@@ -127,7 +136,7 @@ const GameInfo = ({ game, id }) => {
           <Grid item>
             <Divider className={hr} />
             <Typography className={description} variant="body1">
-              {game.description_raw}
+              {!!game.description_raw ? game.description_raw : dummyDescription}
             </Typography>
           </Grid>
         </Grid>

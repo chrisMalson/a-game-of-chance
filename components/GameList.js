@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   image: {
-    border: `2px solid ${theme.palette.secondary.main}`,
+    border: `1px solid ${theme.palette.secondary.main}`,
     height: "100%",
     minWidth: "100%",
     objectFit: "cover",

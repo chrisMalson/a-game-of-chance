@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   image: {
-    border: `2px solid ${theme.palette.secondary.main}`,
+    border: `1px solid ${theme.palette.secondary.main}`,
     height: "100%",
     minWidth: "100%",
-    objectPosition: "50% 50%",
     objectFit: "cover",
+    objectPosition: "50% 50%",
   },
   pageWrapper: {
     minHeight: "100vh",
@@ -74,7 +74,7 @@ const Search = ({ games, value }) => {
       </Typography>
       {searchResults.length > 0 ? (
         <Grid container direction="row" justify="center">
-          <Grid item xs={10} sm={8} md={6}>
+          <Grid item xs={10} md={8} xl={6}>
             <Paper className={paper} variant="outlined">
               <GridList spacing={10} cols={columns}>
                 {searchResults}

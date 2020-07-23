@@ -19,12 +19,9 @@ const useStyles = makeStyles({
   formControl: {
     width: "100%",
   },
-  // optionsBar: {
-  //   display: "flex",
-  //   justifyContent: "space-between",
-  //   flexWrap: "nowrap",
-  //   marginBottom: "10px",
-  // },
+  optionsBar: {
+    marginBottom: "10px",
+  },
 });
 
 // filter options include the following:
