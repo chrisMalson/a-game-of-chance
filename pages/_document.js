@@ -19,6 +19,18 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=VT323&display=swap" // font used for title of site
           />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-16x16.png"
+            sizes="16x16"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicon-32x32.png"
+            sizes="32x32"
+          />
         </Head>
         <body>
           <Main />

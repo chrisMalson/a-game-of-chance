@@ -6,7 +6,7 @@ import ReturnToTopButton from "./ReturnToTopButton";
 const useStyles = makeStyles((theme) => ({
   footer: {
     width: "100%",
-    padding: "2rem",
+    padding: "1rem",
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
     textAlign: "center",
@@ -23,7 +23,7 @@ const Footer = () => {
     <Box className={footerWrapper}>
       <ReturnToTopButton />
       <Box className={footer}>
-        <Typography variant="h6">
+        <Typography variant="body1">
           This site was created by{" "}
           <Link
             color="inherit"
@@ -31,6 +31,13 @@ const Footer = () => {
             target="_blank"
           >
             Chris Malson
+          </Link>
+          .
+        </Typography>
+        <Typography variant="body1">
+          Video game data provided by{" "}
+          <Link color="inherit" href="https://rawg.io/" target="_blank">
+            RAWG
           </Link>
           .
         </Typography>
