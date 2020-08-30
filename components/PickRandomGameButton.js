@@ -2,12 +2,14 @@ import {
   Button,
   Container,
   IconButton,
+  Link as MaterialLink,
   Modal,
   Paper,
   Snackbar,
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
+import NextLink from "next/link";
 import CasinoIcon from "@material-ui/icons/Casino";
 import CloseIcon from "@material-ui/icons/Close";
 import { Alert } from "@material-ui/lab";
@@ -45,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "cover",
     objectPosition: "50% 50%",
     width: "100%",
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   modal: {
     margin: "5%",
@@ -52,6 +57,11 @@ const useStyles = makeStyles((theme) => ({
       margin: "5% 30%",
     },
     maxHeight: "90vh",
+  },
+  modalLink: {
+    "&:hover": {
+      cursor: "pointer",
+    },
   },
   paper: {
     alignItems: "center",
@@ -80,6 +90,7 @@ const PickRandomGameButton = () => {
     buttonWrapper,
     cancel,
     modal,
+    modalLink,
     paper,
     image,
   } = useStyles();
@@ -147,10 +158,14 @@ const PickRandomGameButton = () => {
             <Typography variant="body2" gutterBottom>
               You should play...
             </Typography>
-            <img src={chosenGame.background_image} className={image} />
-            <Typography variant="h5" align="center" gutterBottom>
-              {chosenGame.name}
-            </Typography>
+            <NextLink href="/game/[id]" as={`/game/${chosenGame.id}`}>
+              <MaterialLink color="inherit">
+                <img src={chosenGame.background_image} className={image} />
+                <Typography variant="h5" align="center" gutterBottom>
+                  {chosenGame.name}
+                </Typography>
+              </MaterialLink>
+            </NextLink>
             <Button
               className={buttonOK}
               size="large"

@@ -17,8 +17,6 @@ const useStyles = makeStyles({
 // renders a button that adds game to list with selectable platform
 // lists only available platforms from data fetched via API call
 const AddGameButton = ({ game }) => {
-  console.log(game);
-
   const router = useRouter();
   const { dispatch } = useContext(GamesContext);
   const { button, select } = useStyles();

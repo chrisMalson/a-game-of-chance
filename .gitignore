@@ -4,6 +4,7 @@
 /node_modules
 
 # misc
+/database_backups
 .DS_Store
 .env.local
 .env.development.local

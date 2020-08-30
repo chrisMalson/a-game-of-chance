@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useState } from "react";
 
 import AuthIndex from "./AuthIndex";
@@ -92,13 +92,13 @@ const Header = () => {
           wrap={gridWrap}
         >
           <Grid item className={titleWrapper}>
-            <Link href="/">
+            <NextLink href="/">
               <MaterialLink underline="none" color="initial">
                 <Typography className={title} variant="h2" align="left">
                   A Game of Chance
                 </Typography>
               </MaterialLink>
-            </Link>
+            </NextLink>
           </Grid>
           {user && (
             <Grid item className={formWrapper}>
