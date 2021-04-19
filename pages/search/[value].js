@@ -94,7 +94,10 @@ const Search = ({ games, value }) => {
 // getStaticProps would have required getStaticPaths = revisit?
 Search.getInitialProps = async (context) => {
   const { value } = context.query; // from /search/[value]
-  const url = `https://api.rawg.io/api/games?search=${value}`; // TODO: revisit page size
+  const apiKey = process.env.rawgApiKey;
+
+  const url = `https://api.rawg.io/api/games?search=${value}&key=${apiKey}`; // TODO: revisit page size
+  
   const { data } = await axios({
     method: "get",
     url,
