@@ -32,9 +32,6 @@ GamePage.getInitialProps = async (context) => {
   const { data } = await axios({
     method: "get",
     url,
-    headers: {
-      "User-Agent": "a-game-of-chance", // RAWG.io requires this for their API calls
-    },
   });
 
   return {
