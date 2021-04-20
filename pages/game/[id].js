@@ -26,7 +26,7 @@ const GamePage = ({ game, id }) => {
 GamePage.getInitialProps = async (context) => {
   const { id } = context.query; // from /game/id
 
-  const apiKey = process.env.rawgApiKey;
+  const apiKey = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 
   const url = `https://api.rawg.io/api/games/${id}?key=${apiKey}`;
   const { data } = await axios({

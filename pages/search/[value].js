@@ -94,7 +94,7 @@ const Search = ({ games, value }) => {
 // getStaticProps would have required getStaticPaths = revisit?
 Search.getInitialProps = async (context) => {
   const { value } = context.query; // from /search/[value]
-  const apiKey = process.env.rawgApiKey;
+  const apiKey = process.env.NEXT_PUBLIC_RAWG_API_KEY;
 
   const url = `https://api.rawg.io/api/games?search=${value}&key=${apiKey}`; // TODO: revisit page size
   
