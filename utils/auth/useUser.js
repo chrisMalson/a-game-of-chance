@@ -30,7 +30,7 @@ const useUser = () => {
   useEffect(() => {
     const cookie = cookies.get("auth");
     if (!cookie) {
-      router.push("/");
+      router.push("/auth");
       return;
     }
     setUser(JSON.parse(cookie));
